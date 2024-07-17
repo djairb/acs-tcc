@@ -1,11 +1,34 @@
-.container-ola{
-
+.app-container {
+    width: 100%;
+    margin: 10px 0px 10px 0px;
+  
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+  
+  
+  
+  }
+  
+  .register--container {
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 250px;
+    min-height: 300px;
+    margin: 20px;
+  
+    border: 4px solid black;
+    border-radius: 30px;
+  
+  
+  
+  }
 
-
-
-}
+  .register--container h1{
+    text-align: center;
+  }
