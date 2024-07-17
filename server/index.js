@@ -104,6 +104,30 @@ app.get("/getUser", (req, res) =>{
 
 
 
+app.get("/getUser", async (req, res) => {
+    try {
+      let connection = await mysql.createPool({
+
+        host:"localhost",
+        user:"root",
+        password:"Karolinne102",
+        database:"excel",
+    });
+      let usuario = req.query.usuario;
+      let senha = req.query.senha;
+  
+      // Criar consulta preparada com placeholders
+      let sql = "SELECT * FROM usuarios WHERE usuario = ? AND senha = ?";
+      let [result] = await connection.query(sql, [usuario, senha]);
+  
+      res.send(result);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send({ error: err.message });
+    } finally {
+      connection.end();
+    }
+  });
 
 // app.get("/", (req, res)=>{
 
