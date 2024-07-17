@@ -6,7 +6,7 @@ import Axios from "axios";
 
 
 
-function TelaPrincipal() {
+function TelaLogin() {
 
   const userRecusado = {
 
@@ -44,11 +44,9 @@ function TelaPrincipal() {
 
   );
 
-
   // useEffect é utilizado com a dependência [logado]. Isso significa que o bloco de código dentro do useEffect será executado sempre que o valor de logado for alterado. Isso permite que você realize ações adicionais sempre que o estado logado for modificado.
 
-  // };
-  
+  // };  
 
   useEffect(() => {
     // O código dentro deste bloco será executado sempre que 'logado' for alterado
@@ -88,14 +86,7 @@ function TelaPrincipal() {
 
     navigate('/pagina-crud', { state: dadoPadrao });
 
-
-
   }
-
-
-
-
-
 
   return (
     <div className='app-container'>
@@ -142,7 +133,7 @@ function TelaPrincipal() {
   );
 }
 
-export default TelaPrincipal;
+export default TelaLogin;
 
 
 
