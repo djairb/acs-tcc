@@ -86,48 +86,51 @@ app.delete("/delete/:id", (req, res) => {
 
 });
 
-app.get("/getUser", (req, res) =>{
+// app.get("/getUser", (req, res) =>{
+
+//     let usuario = req.query.usuario ?? '';
+//     let senha = req.query.senha ?? '';
+
+//     let SQL= "SELECT * FROM usuarios WHERE usuario = ? and senha = ?";
+
+//     db.query(SQL, [usuario, senha], (err, result) =>{
+
+//         if (err) console.log(err);
+//         else res.send(result);
+//         //envia o numero da lista da chamada
+//     })
+
+// });
+
+
+
+app.get("/getUser", (req, res) => {
 
     let usuario = req.query.usuario ?? '';
     let senha = req.query.senha ?? '';
 
-    let SQL= "SELECT * FROM usuarios WHERE usuario = ? and senha = ?";
-
-    db.query(SQL, [usuario, senha], (err, result) =>{
-
-        if (err) console.log(err);
-        else res.send(result);
-        //envia o numero da lista da chamada
-    })
-
+    // Consulta SQL parametrizada
+    let SQL = "SELECT * FROM usuarios WHERE usuario = ? and senha = ?";
+    
+    // Executando a consulta com parâmetros seguros
+    db.query(SQL, [usuario, senha], (err, result) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send("Erro ao consultar banco de dados");
+        } else {
+            res.send(result);
+        }
+    });
 });
 
 
 
-app.get("/getUser", async (req, res) => {
-    try {
-      let connection = await mysql.createPool({
 
-        host:"localhost",
-        user:"root",
-        password:"Karolinne102",
-        database:"excel",
-    });
-      let usuario = req.query.usuario;
-      let senha = req.query.senha;
-  
-      // Criar consulta preparada com placeholders
-      let sql = "SELECT * FROM usuarios WHERE usuario = ? AND senha = ?";
-      let [result] = await connection.query(sql, [usuario, senha]);
-  
-      res.send(result);
-    } catch (err) {
-      console.error(err);
-      res.status(500).send({ error: err.message });
-    } finally {
-      connection.end();
-    }
-  });
+
+
+// Supondo que você tenha um pool de conexões ou objeto de conexão definido como 'db'
+
+
 
 // app.get("/", (req, res)=>{
 
