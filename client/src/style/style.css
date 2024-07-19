@@ -1,0 +1,105 @@
+.containerCard {
+
+    border: 3px solid black;
+    margin: 10px 0px;
+    border-radius: 20px;
+    width: 300px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0px;
+
+    cursor: pointer;
+}
+
+.containerDetalhes {
+
+    display: flex;
+    flex-direction: row;
+
+    gap: 10px;
+    border-bottom: 2px solid orangered;
+    padding-bottom: 3px;
+
+
+}
+
+.containerCard:hover{
+
+    background-color:antiquewhite;
+
+
+}
+
+
+.app-container {
+    width: 100%;
+    margin: 10px 0px 10px 0px;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+  
+  
+  }
+  
+  .register--container {
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 250px;
+    min-height: 300px;
+    margin: 20px;
+  
+    border: 4px solid black;
+    border-radius: 30px;
+  
+  
+  
+  }
+
+  .register--container h1{
+    text-align: center;
+  }
+  
+  .register--container {
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 250px;
+    height: 280px;
+  
+    border: 4px solid black;
+    border-radius: 30px;
+  
+  
+  
+  }
+  
+  .bg-verde, .bg-vermelho{
+  
+    font-size: 12px;
+  
+  
+  
+  }
+  
+  .bg-verde{
+  
+    color: green;
+  }
+  
+  .bg-vermelho{
+    color: red;
+  }

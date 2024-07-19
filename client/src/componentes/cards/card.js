@@ -1,5 +1,5 @@
 import React from "react";
-import './card.css';
+import '../../style/style.css';
 import FormDialog from "../dialog/dialogForm";
 
 export default function Card(props) {

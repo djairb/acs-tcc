@@ -1,6 +1,6 @@
-import './style.css'
-import React, { useState, useEffect } from 'react';
-import { Link, createRoutesFromChildren } from 'react-router-dom';
+import '../../style/style.css'
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Axios from "axios";
 
@@ -8,20 +8,10 @@ import Axios from "axios";
 
 function TelaLogin() {
 
-  const userRecusado = {
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
-    texto: "Usuário não existe no sistema",
-    style: "bg-vermelho"
-
-
-  };
-
-  const userAceito = {
-
-    texto: "Usuário achado no sistema",
-    style: "bg-verde"
-
-
+  const onSubmit = (data) => {
+    console.log(data); // Aqui você pode enviar os dados para o backend ou fazer outra operação
   };
 
   const [logado, setLogado] = useState();
@@ -34,39 +24,9 @@ function TelaLogin() {
 
   const navigate = useNavigate();
 
-  const handleChangeValues = value => (
-
-    setValues(prevValue => ({
-      ...prevValue,
-      [value.target.name]: value.target.value,
-
-    }))
-
-  );
-
   // useEffect é utilizado com a dependência [logado]. Isso significa que o bloco de código dentro do useEffect será executado sempre que o valor de logado for alterado. Isso permite que você realize ações adicionais sempre que o estado logado for modificado.
 
   // };  
-
-  useEffect(() => {
-    // O código dentro deste bloco será executado sempre que 'logado' for alterado
-
-    if (logado !== undefined) {
-
-      console.log("mudou")
-
-      { logado ? setTexto(userAceito) : setTexto(userRecusado) }
-
-    }
-
-    if (logado){
-
-      userAceito.texto = `Bem vindo usuário com ID: ${dadoPadrao.id}` 
-
-    }
-
-
-  }, [logado, dadoPadrao]);
 
   const handleClickButton = async () => {
     const response = await Axios.get("http://localhost:3001/getUser", { params: { usuario: values.usuario, senha: values.senha } });
@@ -99,7 +59,7 @@ function TelaLogin() {
           name='usuario'
           placeholder='Usuário'
           className='register--input'
-          onChange={handleChangeValues}
+          
         />
 
         <input
@@ -107,7 +67,7 @@ function TelaLogin() {
           name='senha'
           placeholder='Senha'
           className='register--input'
-          onChange={handleChangeValues}
+          
         />
 
         <button
