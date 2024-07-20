@@ -56,7 +56,7 @@ function TelaLogin() {
               id="radio-educador"
               value="educador"
               {...register('tipoUsuario', { required: true })}
-              className={errors.tipoUsuario && "input-error"}
+              
             />
             <label for="radio-educador">Educador</label>
 
@@ -69,7 +69,7 @@ function TelaLogin() {
               id="radio-coordenador"
               value="coordenador"
               {...register('tipoUsuario', { required: true })}
-              className={errors.tipoUsuario && "input-error"}
+              
             />
             <label for="radio-coordenador">Coordenador</label>
 
@@ -78,13 +78,13 @@ function TelaLogin() {
 
         </div>
 
-        {errors.tipoUsuario && <p className="error-message">Selecione uma opção (Coordenador/Educador).</p>}
+        {errors.tipoUsuario && <p className="error-message">Selecione uma opção (Coordenador/Educador)</p>}
 
-        <label>Login</label>
+        <label>Usuário</label>
 
         <input
           type='text'
-          placeholder='Inserir login'
+          placeholder='Inserir usuário'
           className={errors.tipoUsuario && "input-error"}
           {...register('usuario', {
             required: true,
@@ -92,7 +92,7 @@ function TelaLogin() {
           })}      
         />
         {errors.usuario && errors.usuario.type === 'required' && (<p className="error-message">Usuário é obrigatório.</p>)}
-        {errors.usuario && errors.usuario.type === 'pattern' && (<p className="error-message">Usuário deve conter apenas letras e números.</p>
+        {errors.usuario && errors.usuario.type === 'pattern' && (<p className="error-message">Usuário deve conter apenas letras e números</p>
         )}
 
         <label>Senha</label>
@@ -103,7 +103,7 @@ function TelaLogin() {
           className={errors.senha && "input-error"}
           {...register('senha', { required: true })}      
         />
-        {errors.senha && <p className="error-message">Senha é obrigatória.</p>}
+        {errors.senha && <p className="error-message">Senha é obrigatória</p>}
 
         <button type="submit">Logar</button>
 

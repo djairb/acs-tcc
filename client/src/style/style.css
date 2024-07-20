@@ -1,9 +1,107 @@
+.mainLogin{
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.formLogin{
+  width: 450px;
+  height: 500px;
+  border: 2px solid #f1892a;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  
+  
+}
+
+.formLogin label{
+  font-size: 1.6rem;
+}
+
+
+.formLogin button{
+  width: 90%;
+  height: 50px;
+  cursor: pointer;
+  border: none;
+  background-color: #f1892a;
+  color: white;
+  font-size: 1.3rem;
+  
+}
+
+.formLogin button:hover{
+ 
+  background-color: white;
+  color: #f1892a;
+  border: 1.5px solid #f1892a;
+  
+}
+
+.formLogin input{
+  width: 90%;
+  height: 50px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+}
+
+.formLogin input::placeholder{
+  text-align: center;
+  font-size: 1.3rem;
+
+}
+
+
+
+.formLogin .profissaoDiv .opdiv{
+  display: flex;
+  gap: 3px;
+}
+
+.formLogin .profissaoDiv .opdiv input, .formLogin .profissaoDiv .opdiv label{
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+
+.formLogin .profissaoDiv{
+  display: flex;
+  width: 90%;
+  
+  justify-content: space-around;
+  
+}
+
+
+
+
+
+
+
+button {
+  display: block;
+  width: 100%;
+  padding: 5px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .error-message {
   color: red;
   font-size: 14px;
   margin-top: 5px;
 }
 
-.opdiv .input-error {
+.opdiv .input-error, .formLogin .input-error {
   outline: 1px solid rgb(255, 72, 72);
 }
