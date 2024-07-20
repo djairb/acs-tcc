@@ -8,8 +8,9 @@ import LoginForm from "../paginas/TelaLogin2";
 const Rotas = () => (
   <HashRouter>
     <Routes>
-      <Route exact path='/'   element={<LoginForm/>}/>
+      <Route exact path='/'   element={<TelaLogin/>}/>
       <Route exact path='/pagina-crud'   element={<TelaCrud/>}/>
+      <Route exact path='/login'   element={<TelaLogin/>}/>
     </Routes>
   </HashRouter>
 );
