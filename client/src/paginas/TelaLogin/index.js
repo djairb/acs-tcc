@@ -15,49 +15,31 @@ function TelaLogin() {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data) => {  
+
     try {
       const response = await Axios.post("http://localhost:3001/getUserLogin", {
-
         usuario: data.usuario,
         senha: data.senha,
         tipoUsuario: data.tipoUsuario
-
       });
-
-      if (response.data.success) {
-        alert("Logado com sucesso!"); // Exemplo de ação após login bem-sucedido
-        setLoginError(false); // Resetar estado de erro, se necessário
-        // navigate('/dashboard'); // Exemplo de navegação para outra página após login
+      
+      if ((response.data.length)>0) {
+        alert("Loagado");
+        setLoginError(false); 
+        
+        // Login bem-sucedido, navegar para a página adequada
+        // navigate('/pagina-crud', { state: response.data.usuario }); // Exemplo de passagem de dados para a próxima página
       } else {
-        setLoginError(true); // Ativar estado de erro para exibir mensagem de erro
+        // Login falhou, exibir mensagem de erro
+        setLoginError(true); // Ativa o estado de erro
       }
     } catch (error) {
       console.error('Erro ao tentar fazer login:', error);
-      setLoginError(true);
+      alert("Ocorreu um erro ao tentar fazer login. Por favor, tente novamente mais tarde.");
     }
   };
   
-
-  // const handleClickButton = async () => {
-  //   const response = await Axios.get("http://localhost:3001/getUser", { params: { usuario: values.usuario, senha: values.senha } });
-  //   let numero = response.data.length;
-    
-  //   //os valores sao alterados aqui. mas sem o useEffect voce nao pode usar fora da funcao. mas o useeffect roda um conjunto de funcoes de acordo com as modificações, feitas internas ou nao - como é que tá? Jesus é bom.
-  //   { (numero > 0) ? setLogado(true) : setLogado(false) }
-
-  //   if(numero > 0){
-  //     //setei dadoPadrao e coloquei ele como dependencia no effect. ele não modifica a menos que coloque como dependencia no effect e assim faça de fato o valor ser setado.
-  //     setDadoPadrao(response.data[0])
-  //   }
-    
-  // };
-
-  // const navegarPagina = () =>{
-
-  //   navigate('/pagina-crud', { state: dadoPadrao });
-
-  // }
 
   return (
 
