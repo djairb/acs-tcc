@@ -133,7 +133,8 @@ app.delete("/delete/:id", (req, res) => {
 
 app.post("/getUserLogin", (req, res) => {    
 
-    let { usuario, senha, tipoUsuario } = req.body.params;
+    let { usuario, senha, tipoUsuario } = req.body;
+    console.log(req.body)
 
     let SQL;
     if(tipoUsuario==="coordenador"){

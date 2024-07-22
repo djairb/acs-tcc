@@ -18,7 +18,11 @@ function TelaLogin() {
   const onSubmit = async (data) => {  
 
     try {
-      const response = await Axios.post("http://localhost:3001/getUserLogin", { params: { usuario: data.usuario, senha: data.senha, tipoUsuario: data.tipoUsuario } });
+      const response = await Axios.post("http://localhost:3001/getUserLogin", {
+        usuario: data.usuario,
+        senha: data.senha,
+        tipoUsuario: data.tipoUsuario
+      });
       
       if ((response.data.length)>0) {
         alert("Loagado");
