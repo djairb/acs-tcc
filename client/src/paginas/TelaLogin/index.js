@@ -10,12 +10,30 @@ function TelaLogin() {
 
   // };  
 
+  const [loginError, setLoginError] = useState();
   const navigate = useNavigate();
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data); // Aqui você pode enviar os dados para o backend ou fazer outra operação
+  const onSubmit = async (data) => {  
+
+    try {
+      const response = await Axios.post("http://localhost:3001/getUserLogin", { params: { usuario: data.usuario, senha: data.senha, tipoUsuario: data.tipoUsuario } });
+      
+      if ((response.data.length)>0) {
+        alert("Loagado");
+        setLoginError(false); 
+        
+        // Login bem-sucedido, navegar para a página adequada
+        // navigate('/pagina-crud', { state: response.data.usuario }); // Exemplo de passagem de dados para a próxima página
+      } else {
+        // Login falhou, exibir mensagem de erro
+        setLoginError(true); // Ativa o estado de erro
+      }
+    } catch (error) {
+      console.error('Erro ao tentar fazer login:', error);
+      alert("Ocorreu um erro ao tentar fazer login. Por favor, tente novamente mais tarde.");
+    }
   };
   
 
@@ -49,7 +67,7 @@ function TelaLogin() {
 
         <div className='profissaoDiv'>
 
-          <div class="opdiv">
+          <div className="opdiv">
 
             <input
               type="radio"
@@ -58,11 +76,11 @@ function TelaLogin() {
               {...register('tipoUsuario', { required: true })}
               
             />
-            <label for="radio-educador">Educador</label>
+            <label htmlFor="radio-educador">Educador</label>
 
           </div>
 
-          <div class="opdiv">
+          <div className="opdiv">
 
             <input
               type="radio"
@@ -71,7 +89,7 @@ function TelaLogin() {
               {...register('tipoUsuario', { required: true })}
               
             />
-            <label for="radio-coordenador">Coordenador</label>
+            <label htmlFor="radio-coordenador">Coordenador</label>
 
           </div>
 
@@ -106,6 +124,9 @@ function TelaLogin() {
         {errors.senha && <p className="error-message">Senha é obrigatória</p>}
 
         <button type="submit">Logar</button>
+
+        {loginError && <p className="error-message">Usuário não encontrado</p>}
+
 
 
       </form>
