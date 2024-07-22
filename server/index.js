@@ -131,33 +131,62 @@ app.delete("/delete/:id", (req, res) => {
 
 
 
-app.post("/getUserLogin", (req, res) => {    
+// app.post("/getUserLogin", (req, res) => {    
 
-    let { usuario, senha, tipoUsuario } = req.body;
-    console.log(req.body)
+//     let { usuario, senha, tipoUsuario } = req.body;
+//     console.log(req.body)
+
+//     let SQL;
+//     if(tipoUsuario==="coordenador"){
+//         SQL = "SELECT * FROM Coordenadores WHERE usuario = ? and senha = ?";
+//     }else{
+
+//         SQL = "SELECT * FROM Educadores WHERE usuario = ? and senha = ?";
+
+//     }
+ 
+//     // Executando a consulta com parâmetros seguros
+//     db.query(SQL, [usuario, senha], (err, result) => {
+        
+//         if (err) {
+//             console.log(err);
+//             res.status(500).send("Erro ao consultar banco de dados");
+//         } else {
+            
+//             res.send(result);
+            
+//         }
+//     });
+// });
+
+
+app.post("/getUserLogin", (req, res) => {    
+    const { usuario, senha, tipoUsuario } = req.body;
 
     let SQL;
-    if(tipoUsuario==="coordenador"){
+    if (tipoUsuario === "coordenador") {
         SQL = "SELECT * FROM Coordenadores WHERE usuario = ? and senha = ?";
-    }else{
-
+    } else {
         SQL = "SELECT * FROM Educadores WHERE usuario = ? and senha = ?";
-
     }
- 
+
     // Executando a consulta com parâmetros seguros
     db.query(SQL, [usuario, senha], (err, result) => {
-        
         if (err) {
-            console.log(err);
+            console.error("Erro ao consultar banco de dados:", err);
             res.status(500).send("Erro ao consultar banco de dados");
         } else {
-            
-            res.send(result);
-            
+            if (result.length > 0) {
+                // Usuário encontrado, login bem-sucedido
+                res.status(200).json({ success: true, message: "Usuário autenticado com sucesso!" });
+            } else {
+                // Nenhum usuário encontrado com as credenciais fornecidas
+                res.status(400).json({ success: false, message: "Credenciais inválidas. Verifique usuário e senha." });
+            }
         }
     });
 });
+
 
 
 
