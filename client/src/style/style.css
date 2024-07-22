@@ -7,6 +7,7 @@
   
 }
 
+
 .formLogin{
   width: 450px;
   height: 500px;
@@ -78,24 +79,6 @@
   
 }
 
-
-
-
-
-
-
-button {
-  display: block;
-  width: 100%;
-  padding: 5px;
-  font-size: 16px;
-  background-color: #007bff;
-  color: white;
-  
-  border-radius: 5px;
-  cursor: pointer;
-}
-
 .error-message {
   color: red;
   font-size: 14px;
@@ -104,4 +87,19 @@ button {
 
 .opdiv .input-error, .formLogin .input-error {
   outline: 1px solid rgb(255, 72, 72);
+}
+
+
+.mainHome{
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.mainHome h1{
+  font-size: 2rem;
 }

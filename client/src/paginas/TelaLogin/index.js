@@ -1,7 +1,8 @@
 import '../../style/style.css'
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
 import Axios from "axios";
 
 function TelaLogin() {
@@ -9,7 +10,7 @@ function TelaLogin() {
   // useEffect é utilizado com a dependência [logado]. Isso significa que o bloco de código dentro do useEffect será executado sempre que o valor de logado for alterado. Isso permite que você realize ações adicionais sempre que o estado logado for modificado.
 
   // };  
-
+  const {user,toggleUser} = useContext(UserContext);
   const [loginError, setLoginError] = useState();
   const navigate = useNavigate();
 
@@ -25,10 +26,14 @@ function TelaLogin() {
       });
       
       if ((response.data.length)>0) {
-        alert("Loagado");
-        setLoginError(false); 
+        toggleUser(response.data[0]);
+        setLoginError(false);
+        console.log(user);
+        {data.tipoUsuario==="educador" ? navigate('/home-educador') : alert("Tela Coord ainda não existe")}
         
-        // Login bem-sucedido, navegar para a página adequada
+       
+        
+        // data ta sendo lido depois que response retorna positivo. então data existe no banco.
         // navigate('/pagina-crud', { state: response.data.usuario }); // Exemplo de passagem de dados para a próxima página
       } else {
         // Login falhou, exibir mensagem de erro
