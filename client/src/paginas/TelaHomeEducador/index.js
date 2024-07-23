@@ -10,7 +10,12 @@ const TelaHomeEducador = () => {
 
     const {user} = useContext(UserContext);
 
-    console.log(user);
+    const navegarBotaoTurma = () =>{
+
+        navigate('/tela-turmas');
+    }
+
+
 
     useEffect(() => {
 
@@ -28,18 +33,13 @@ const TelaHomeEducador = () => {
                 <h1>Olá, {user.nome}</h1>
                 <div className='divBotoesHome'>
 
-                    <button>Ver Turmas</button>
-                    <button>Ver Turmas</button>
-                    <button>Ver Turmas</button>               
-                    
+                    <button onClick={navegarBotaoTurma}>Ver Turmas</button>
+                    <button>Alterar</button>
+                    <button>Alterar</button>               
                     
                 </div>
 
-
-
-            </div>
-
-            
+            </div>            
 
             <div className='aulasDiv'>
 
