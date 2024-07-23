@@ -10,6 +10,8 @@ const TelaHomeEducador = () => {
 
     const {user} = useContext(UserContext);
 
+    console.log(user);
+
     useEffect(() => {
 
         if(user.id===null){
@@ -22,7 +24,26 @@ const TelaHomeEducador = () => {
         <main className='mainHome'>
 
             <h1>Olá, {user.nome}!</h1>
-            {console.log(user)}        
+            <div className='divBotoesHome'>
+
+                <button>Ver Turmas</button>               
+                
+                
+            </div>
+
+            <div className='aulasDiv'>
+
+                <div className='teste'></div>
+                <div className='teste'></div>
+                <div className='teste'></div>
+                <div className='teste'></div>
+                <div className='teste'></div>
+                <div className='teste'></div>
+                
+                
+                
+                
+            </div>        
 
         </main>
 

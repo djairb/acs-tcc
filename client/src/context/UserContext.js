@@ -4,11 +4,23 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
 
+    // const [user, setUser] = useState({
+
+    //     id: null
+
+    // });
+
     const [user, setUser] = useState({
 
-        id: null
+        foto_perfil : null,
+        id_educador : 1,
+        nome : "Arthur Yure",
+        senha : "senha123",
+        usuario : "usuario1"
 
     });
+
+   
 
     const toggleUser = (novoUsuario) => {
         

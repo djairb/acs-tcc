@@ -97,9 +97,69 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
   
 }
 
 .mainHome h1{
   font-size: 2rem;
 }
+
+
+.mainHome button{
+  width: 300px;
+  height: 50px;
+  cursor: pointer;
+  border: none;
+  background-color: #f1892a;
+  color: white;
+  font-size: 1.3rem;
+  border-radius: 5px;
+  
+}
+
+.mainHome button:hover{
+
+  background-color: white;
+  color: #f1892a;
+  border: 1.5px solid #f1892a;
+
+}
+
+.mainHome .aulasDiv{
+  width: 90%;
+  
+  min-height: 80dvh;
+  background-color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 10px;
+  flex-wrap: wrap;
+  gap: 20px;
+  
+
+}
+
+.mainHome .aulasDiv .teste{
+  width: 300px;
+  height: 300px;
+  background-color: rgb(255, 0, 0);
+
+  
+
+}
+
+@media only screen and (max-width: 1024px) {
+
+  .mainHome .aulasDiv{
+    width: 90%;
+    
+  }
+
+
+
+}
+
+
+
