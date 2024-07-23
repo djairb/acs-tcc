@@ -23,13 +23,23 @@ const TelaHomeEducador = () => {
     return (
         <main className='mainHome'>
 
-            <h1>Olá, {user.nome}!</h1>
-            <div className='divBotoesHome'>
+            <div className='nomeBotoesDiv'>
 
-                <button>Ver Turmas</button>               
-                
-                
+                <h1>Olá, {user.nome}</h1>
+                <div className='divBotoesHome'>
+
+                    <button>Ver Turmas</button>
+                    <button>Ver Turmas</button>
+                    <button>Ver Turmas</button>               
+                    
+                    
+                </div>
+
+
+
             </div>
+
+            
 
             <div className='aulasDiv'>
 
