@@ -137,6 +137,16 @@
 
 }
 
+.divBotoesInputs{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  
+  
+}
+
 .mainHome .aulasDiv, .mainPage .divInputs{
   width: 90%;
   
@@ -197,6 +207,12 @@
 
   .mainHome .nomeBotoesDiv .divBotoesHome{
     flex-direction: column;
+  }
+
+  .divBotoesInputs{
+    margin-bottom: 5px;
+    
+    
   }
 
 

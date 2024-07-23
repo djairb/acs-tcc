@@ -15,6 +15,11 @@ const TelaTurmas = () => {
         navigate('/home-educador');
     }
 
+    const navegarBotaoCadastrarTurma = () =>{
+
+        navigate('/home-educador');
+    }
+
     useEffect(() => {
 
         if(user.id===null){
@@ -30,7 +35,16 @@ const TelaTurmas = () => {
 
             <div className='divInputs'></div>
 
-            <button className='botaoInputs' onClick={navegarBotaoVoltar}>Voltar</button>
+            <div className='divBotoesInputs'>
+
+                <button className='botaoInputs' onClick={navegarBotaoVoltar}>Voltar</button>
+
+                <button className='botaoInputs' onClick={navegarBotaoCadastrarTurma}>Cadastrar Turma</button>
+
+
+            </div>
+
+            
 
             
 
