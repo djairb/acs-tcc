@@ -16,7 +16,6 @@ const TelaHomeEducador = () => {
     }
 
 
-
     useEffect(() => {
 
         if(user.id===null){
@@ -43,17 +42,13 @@ const TelaHomeEducador = () => {
 
             <div className='aulasDiv'>
 
-                <div className='teste'></div>
-                <div className='teste'></div>
-                <div className='teste'></div>
-                <div className='teste'></div>
-                <div className='teste'></div>
-                <div className='teste'></div>
+                        
                 
                 
                 
-                
-            </div>        
+            </div>
+
+                    
 
         </main>
 

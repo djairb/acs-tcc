@@ -21,8 +21,13 @@
   
 }
 
-.formLogin label{
+.formLogin label, .mainPage label{
   font-size: 1.6rem;
+}
+
+.mainPage label{
+  font-size: 1.6rem;
+ 
 }
 
 
@@ -50,9 +55,21 @@
   height: 50px;
   border: 1px solid #000000;
   border-radius: 5px;
+  font-size: 1.3rem;
 }
 
-.formLogin input::placeholder{
+.mainPage input{
+
+  width: 500px;
+  height: 50px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  font-size: 1.3rem;
+
+
+}
+
+.formLogin input::placeholder, .mainPage input::placeholder{
   text-align: center;
   font-size: 1.3rem;
 
@@ -101,6 +118,21 @@
   
 }
 
+.mainPage .divInputsMain{
+  
+  width: 90%;
+  border-bottom: 2px solid #f1892a;
+  border-top: 2px solid #f1892a;
+	padding-bottom: 5px;
+
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
 .mainHome .nomeBotoesDiv h1, .mainPage .titlePage{
   font-size: 2rem;
 }
@@ -109,6 +141,7 @@
 
   border-bottom: 2px solid #f1892a;
 	padding-bottom: 5px;
+  margin-top: 5px;
 
 }
 
@@ -143,15 +176,17 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  margin-bottom: 5px;
   
   
 }
 
-.mainHome .aulasDiv, .mainPage .divInputs{
+.mainHome .aulasDiv{
   width: 90%;
   
-  min-height: 80dvh;
-
+  
+  flex: 1;
+  /*O flex: 1 é uma propriedade poderosa do CSS que, quando aplicado a um elemento dentro de um container flex, faz com que ele ocupe todo o espaço disponível tanto na direção principal quanto na transversal.*/
   border: 2px solid #f1892a;
 
   border-radius: 5px;
@@ -162,8 +197,14 @@
   padding: 10px 10px;
   flex-wrap: wrap;
   gap: 20px;
+  margin-bottom: 5px;
   
 
+}
+
+.divInputs{
+
+  flex-direction: column;
 }
 
 

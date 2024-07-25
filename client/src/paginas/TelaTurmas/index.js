@@ -17,7 +17,7 @@ const TelaTurmas = () => {
 
     const navegarBotaoCadastrarTurma = () =>{
 
-        navigate('/home-educador');
+        navigate('/tela-detalhe-turma');
     }
 
     useEffect(() => {
@@ -33,7 +33,9 @@ const TelaTurmas = () => {
 
             <h1 className='titlePage'>Turmas Cadastradas</h1>
 
-            <div className='divInputs'></div>
+            <div className='divInputsMain'></div>
+
+            
 
             <div className='divBotoesInputs'>
 
@@ -44,9 +46,6 @@ const TelaTurmas = () => {
 
             </div>
 
-            
-
-            
 
         </main>
 
