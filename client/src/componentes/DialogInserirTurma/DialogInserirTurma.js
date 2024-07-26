@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Axios from 'axios';
 
+import '../../style/style.css';
+
+import { useForm } from 'react-hook-form';
+
+
 export default function DialogInserirTurma(props) {
+
+    useForm();
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     const handleInserirTurma = () => {
 
@@ -66,39 +74,59 @@ export default function DialogInserirTurma(props) {
 
 
         <Dialog open={props.open} onClose={handleClose} aria-labelledby='form-dialog-title'>
-            <DialogTitle id="form-dialog-title">Editar</DialogTitle>
+            <DialogTitle id="form-dialog-title">Cadastrar Turma</DialogTitle>
             <DialogContent>
-                <TextField
-                    autoFocus
-                    margin='dense'
-                    id="nome"
-                    label="Nome do Jogo"
-                    /// o valor default sempre vai ser props.nome - props.nome foi passado pelo card
-                    defaultValue={props.nome}
-                    onChange={handleChangeValues}
+
+            <div className='divInputsDialog'>
+
+                <label>Nome da Turma:</label>
+
+                <input
                     type='text'
-                    fullWidth
+                    placeholder='Nome da turma'
+                    className={errors.nome_turma && "input-error"}
+                    {...register('nome_turma', { required: true })}      
                 />
-                <TextField
-                    autoFocus
-                    margin='dense'
-                    id="preco"
-                    label="Preço do jogo"
-                    defaultValue={props.preco}
-                    onChange={handleChangeValues}
-                    type='text'
-                    fullWidth
-                />
-                <TextField
-                    autoFocus
-                    margin='dense'
-                    id="categoria"
-                    label="Categoria do jogo"
-                    defaultValue={props.categoria}
-                    onChange={handleChangeValues}
-                    type='text'
-                    fullWidth
-                />
+                {errors.nome_turma && <p className="error-message">Nome da turma é obrigatório</p>}
+
+                <label>Projeto:</label>
+
+                <select
+
+                    className={errors.projeto && "input-error"}
+                    defaultValue="0"
+                    {...register("projeto", { validate: (value) => value !== "0" })}
+                >
+                    <option value="0">Selecionar Projeto</option>
+                    <option value="conectaVidas">Conecta Vidas</option>
+                    <option value="passaporteDigital">Passaporte Digital</option>
+                    <option value="centroFormacao">Centro de Formação</option>
+                    <option value="oportunizarUrbano">Oportunizar Urbano</option>
+                    <option value="oportunizarRural">Oportunizar Rural</option>
+                    <option value="vamoSimbora">VamoSimbora</option>
+                </select>
+                {errors?.projeto?.type === "validate" && (<p className="error-message">Selecione um Projeto</p>)}
+
+                <label>Turno:</label>
+
+                <select
+
+                    className={errors.turno && "input-error"}
+                    defaultValue="0"
+                    {...register("turno", { validate: (value) => value !== "0" })}
+                >
+                    <option value="0">Selecionar Turno</option>
+                    <option value="manha">Manhã</option>
+                    <option value="tarde">Tarde</option>
+                    <option value="noite">Noite</option>
+                    
+                </select>
+                {errors?.turno?.type === "validate" && (<p className="error-message">Selecione um Turno</p>)}
+
+            </div>                
+
+            
+                
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose} color='primary'>

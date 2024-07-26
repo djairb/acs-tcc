@@ -3,7 +3,6 @@ import '../../style/style.css';
 import { useNavigate } from 'react-router-dom';
 
 import { UserContext } from '../../context/UserContext';
-
 import DialogInserirTurma from '../../componentes/DialogInserirTurma/DialogInserirTurma';
 
 const TelaTurmas = () => {

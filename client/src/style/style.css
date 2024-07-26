@@ -25,6 +25,10 @@
   font-size: 1.6rem;
 }
 
+.divInputsMain label, .divInputsDialog label{
+  font-size: 1.3rem;
+}
+
 .mainPage label{
   font-size: 1.6rem;
  
@@ -52,15 +56,20 @@
 }
 
 
-.mainPage input, .mainPage select, .formLogin input{
+.mainPage input, .mainPage select, .formLogin input, .divInputsDialog input, .divInputsDialog select{
 
   width: 500px;
   height: 50px;
   border: 2px solid #000000;
   border-radius: 5px;
   font-size: 1.3rem;
+  padding-left: 10px;
+  
 
+}
 
+.divInputsDialog input, .divInputsDialog select{
+  margin: 0 auto;
 }
 
 .formLogin input{
@@ -100,7 +109,7 @@
   margin-top: 5px;
 }
 
-.opdiv .input-error, .mainPage .divInputsMain .input-error {
+.opdiv .input-error, .mainPage .divInputsMain .input-error, .divInputsDialog .input-error{
   border: 2px solid #ff0000
 }
 
@@ -116,7 +125,9 @@
   
 }
 
-.mainPage .divInputsMain{
+
+
+.mainPage .divInputsMain, .divInputsDialog{
   
   width: 90%;
   border-bottom: 2px solid #f1892a;
@@ -129,6 +140,13 @@
   justify-content: center;
   align-items: center;
   gap: 30px;
+}
+
+.divInputsDialog{
+  border-bottom: none;
+  border-top: none;
+  gap: 20px;
+
 }
 
 .mainHome .nomeBotoesDiv h1, .mainPage .titlePage{
