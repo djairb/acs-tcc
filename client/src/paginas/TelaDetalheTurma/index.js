@@ -121,6 +121,8 @@ const TelaDetalheTurma = () => {
                 </select>
                 {errors?.turno?.type === "validate" && (<p className="error-message">Selecione um Turno</p>)}
 
+                <label>Alunos</label>
+
 
             </div>
 

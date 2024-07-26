@@ -39,6 +39,7 @@
   background-color: #f1892a;
   color: white;
   font-size: 1.3rem;
+  border-radius: 2px;
   
 }
 
@@ -51,7 +52,7 @@
 }
 
 
-.mainPage input, .mainPage select{
+.mainPage input, .mainPage select, .formLogin input{
 
   width: 500px;
   height: 50px;
@@ -60,6 +61,10 @@
   font-size: 1.3rem;
 
 
+}
+
+.formLogin input{
+  width: 90%;
 }
 
 .formLogin input::placeholder, .mainPage input::placeholder{
@@ -216,6 +221,7 @@
   width: 90%;
   display: flex;
   justify-content: space-between;
+  margin-top: 10px;
 }
 
 .mainHome .nomeBotoesDiv .divBotoesHome{
@@ -237,6 +243,7 @@
     width: 100%;
     justify-content: center;
     align-items: center;
+    
   }
 
   .mainHome .nomeBotoesDiv .divBotoesHome{

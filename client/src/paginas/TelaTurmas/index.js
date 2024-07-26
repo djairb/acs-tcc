@@ -1,8 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../../style/style.css';
 import { useNavigate } from 'react-router-dom';
 
 import { UserContext } from '../../context/UserContext';
+
+import DialogInserirTurma from '../../componentes/DialogInserirTurma/DialogInserirTurma';
 
 const TelaTurmas = () => {
 
@@ -15,9 +17,11 @@ const TelaTurmas = () => {
         navigate('/home-educador');
     }
 
-    const navegarBotaoCadastrarTurma = () =>{
+    const [openDialog, setOpenDialog] = useState(false); 
 
-        navigate('/tela-detalhe-turma');
+    const botaoCadastrarTurma = () =>{
+
+        setOpenDialog(true);
     }
 
     useEffect(() => {
@@ -31,6 +35,14 @@ const TelaTurmas = () => {
     return (
         <main className='mainPage'>
 
+            <DialogInserirTurma
+                open={openDialog}
+                setOpenDialog={setOpenDialog}
+
+            
+            
+            />
+
             <h1 className='titlePage'>Turmas Cadastradas</h1>
 
             <div className='divInputsMain'></div>
@@ -41,7 +53,7 @@ const TelaTurmas = () => {
 
                 <button className='botaoInputs' onClick={navegarBotaoVoltar}>Voltar</button>
 
-                <button className='botaoInputs' onClick={navegarBotaoCadastrarTurma}>Cadastrar Turma</button>
+                <button className='botaoInputs' onClick={botaoCadastrarTurma}>Inserir  Turma</button>
 
 
             </div>
