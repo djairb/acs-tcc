@@ -92,13 +92,13 @@ function TelaLogin() {
         <input
           type='text'
           placeholder='Inserir usuário'
-          className={errors.tipoUsuario && "input-error"}
+          className={errors.usuario && "input-error"}
           {...register('usuario', {
             required: true,
             pattern: /^[a-zA-Z0-9]+$/,
           })}      
         />
-        {errors.usuario && errors.usuario.type === 'required' && (<p className="error-message">Usuário é obrigatório.</p>)}
+        {errors.usuario && errors.usuario.type === 'required' && (<p className="error-message">Usuário é obrigatório</p>)}
         {errors.usuario && errors.usuario.type === 'pattern' && (<p className="error-message">Usuário deve conter apenas letras e números</p>
         )}
 

@@ -77,19 +77,49 @@ const TelaDetalheTurma = () => {
             <div className='divInputsMain'>
 
 
-                <label>Usuário</label>
+                <label>Nome da Turma:</label>
 
                 <input
                     type='text'
-                    placeholder='Inserir senha'
-                    className={errors.senha && "input-error"}
-                    {...register('senha', { required: true })}      
+                    placeholder='Nome da turma'
+                    className={errors.nome_turma && "input-error"}
+                    {...register('nome_turma', { required: true })}      
                 />
-                {errors.senha && <p className="error-message">Senha é obrigatória</p>}
+                {errors.nome_turma && <p className="error-message">Nome da turma é obrigatório</p>}
 
+                <label>Projeto:</label>
 
+                <select
 
+                    className={errors.projeto && "input-error"}
+                    defaultValue="0"
+                    {...register("projeto", { validate: (value) => value !== "0" })}
+                >
+                    <option value="0">Selecionar Projeto</option>
+                    <option value="conectaVidas">Conecta Vidas</option>
+                    <option value="passaporteDigital">Passaporte Digital</option>
+                    <option value="centroFormacao">Centro de Formação</option>
+                    <option value="oportunizarUrbano">Oportunizar Urbano</option>
+                    <option value="oportunizarRural">Oportunizar Rural</option>
+                    <option value="vamoSimbora">VamoSimbora</option>
+                </select>
+                {errors?.projeto?.type === "validate" && (<p className="error-message">Selecione um Projeto</p>)}
 
+                <label>Turno:</label>
+
+                <select
+
+                    className={errors.turno && "input-error"}
+                    defaultValue="0"
+                    {...register("turno", { validate: (value) => value !== "0" })}
+                >
+                    <option value="0">Selecionar Turno</option>
+                    <option value="manha">Manhã</option>
+                    <option value="tarde">Tarde</option>
+                    <option value="noite">Noite</option>
+                    
+                </select>
+                {errors?.turno?.type === "validate" && (<p className="error-message">Selecione um Turno</p>)}
 
 
             </div>
@@ -104,7 +134,7 @@ const TelaDetalheTurma = () => {
 
                 <button className='botaoInputs' onClick={navegarBotaoVoltar}>Voltar</button>
 
-                <button className='botaoInputs' onClick={navegarBotaoCadastrarTurma}>Salvar</button>
+                <button className='botaoInputs' onClick={() => handleSubmit(onSubmit)()}>Salvar</button>
 
 
             </div>

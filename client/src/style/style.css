@@ -50,19 +50,12 @@
   
 }
 
-.formLogin input{
-  width: 90%;
-  height: 50px;
-  border: 1px solid #000000;
-  border-radius: 5px;
-  font-size: 1.3rem;
-}
 
-.mainPage input{
+.mainPage input, .mainPage select{
 
   width: 500px;
   height: 50px;
-  border: 1px solid #000000;
+  border: 2px solid #000000;
   border-radius: 5px;
   font-size: 1.3rem;
 
@@ -102,8 +95,8 @@
   margin-top: 5px;
 }
 
-.opdiv .input-error, .formLogin .input-error {
-  outline: 1px solid rgb(255, 72, 72);
+.opdiv .input-error, .mainPage .divInputsMain .input-error {
+  border: 2px solid #ff0000
 }
 
 
