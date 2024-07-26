@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 import DialogInserirTurma from '../../componentes/DialogInserirTurma/DialogInserirTurma';
 
+
 const TelaTurmas = () => {
 
     const navigate = useNavigate();
@@ -25,18 +26,22 @@ const TelaTurmas = () => {
 
     useEffect(() => {
 
-        if(user.id===null){
+        if(user.id_educador===null){
             navigate('/login')
         }
         
       }, [user]);
+
+   
   
     return (
         <main className='mainPage'>
 
             <DialogInserirTurma
+
                 open={openDialog}
                 setOpenDialog={setOpenDialog}
+                id_educador = {user.id_educador}
 
             
             

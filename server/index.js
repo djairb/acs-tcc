@@ -129,12 +129,9 @@ app.delete("/delete/:id", (req, res) => {
 //     });
 // });
 
-
-
 app.post("/getUserLogin", (req, res) => {    
 
     let { usuario, senha, tipoUsuario } = req.body;
-    console.log(req.body)
 
     let SQL;
     if(tipoUsuario==="coordenador"){
@@ -159,6 +156,34 @@ app.post("/getUserLogin", (req, res) => {
     });
 });
 
+
+app.post("/inserirTurma", (req, res) => {    
+
+    let { nome_turma, projeto, turno, id_educador } = req.body;
+    
+
+    let SQL;
+    if(tipoUsuario==="coordenador"){
+        SQL = "SELECT * FROM Coordenadores WHERE usuario = ? and senha = ?";
+    }else{
+
+        SQL = "SELECT * FROM Educadores WHERE usuario = ? and senha = ?";
+
+    }
+ 
+    // Executando a consulta com parâmetros seguros
+    db.query(SQL, [usuario, senha], (err, result) => {
+        
+        if (err) {
+            console.log(err);
+            res.status(500).send("Erro ao consultar banco de dados");
+        } else {
+            
+            res.send(result);
+            
+        }
+    });
+});
 
 
 

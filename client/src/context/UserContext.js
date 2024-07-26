@@ -6,7 +6,7 @@ export const UserProvider = ({ children }) => {
 
     // const [user, setUser] = useState({
 
-    //     id: null
+    //     id_educador: null
 
     // });
 
