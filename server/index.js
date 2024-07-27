@@ -160,19 +160,12 @@ app.post("/getUserLogin", (req, res) => {
 app.post("/inserirTurma", (req, res) => {    
 
     let { nome_turma, projeto, turno, id_educador } = req.body;
-    
 
-    let SQL;
-    if(tipoUsuario==="coordenador"){
-        SQL = "SELECT * FROM Coordenadores WHERE usuario = ? and senha = ?";
-    }else{
 
-        SQL = "SELECT * FROM Educadores WHERE usuario = ? and senha = ?";
-
-    }
+    let SQL = 'insert into Turmas (nome_turma, turno, projeto, id_educador) values (?,?,?,?)';
  
     // Executando a consulta com parâmetros seguros
-    db.query(SQL, [usuario, senha], (err, result) => {
+    db.query(SQL, [nome_turma, turno, projeto, id_educador], (err, result) => {
         
         if (err) {
             console.log(err);
