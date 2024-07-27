@@ -179,6 +179,25 @@ app.post("/inserirTurma", (req, res) => {
 });
 
 
+app.get("/getTurmas", (req, res) =>{
+
+    let SQL= "SELECT * FROM turmas";
+
+    db.query(SQL, (err, result)=>{
+
+        if (err) {
+            console.log(err);
+            res.status(500).send("Erro ao consultar banco de dados");
+        } else {
+            
+            res.send(result);
+            
+        }
+    });
+
+});
+
+
 
 
 

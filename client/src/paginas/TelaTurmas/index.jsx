@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 import DialogInserirTurma from '../../componentes/dialogInserirTurma/dialogInserirTurma';
 
+import Axios from 'axios';
+
 
 const TelaTurmas = () => {
 
@@ -25,20 +27,50 @@ const TelaTurmas = () => {
         navigate('/home-educador');
     }
 
-    const [openDialog, setOpenDialog] = useState(false); 
+    const [openDialog, setOpenDialog] = useState(false);
 
-    const botaoCadastrarTurma = () =>{
-
-        setOpenDialog(true);
-    }    
+    const [semTurma, setSemTurma] = useState(false);
+    
+    const [turmas, setTurmas] = useState([]);
 
     const [count, setCount] = useState(0);
 
+    const [loading, setLoading] = useState(false);
+
+     
+
     useEffect(() => {
         // Código que deve ser executado quando `count` mudar
-        console.log(`O valor de count é ${count}`);
+        const carregarTurmas = async () => {
+            
+            setLoading(true);
+
+            try {
+                
+                const response = await Axios.get('http://localhost:3001/getTurmas');
+                setTurmas(response.data);
+                setSemTurma(response.data.length === 0);
+                setLoading(false);
+                console.log(response);
+              
+        
+            } catch (error) {
+              console.error('Erro ao tentar fazer login:', error);
+              alert("Ocorreu um erro ao tentar fazer login. Por favor, tente novamente mais tarde.");
+              setLoading(false);
+            }
+        };
+
+        carregarTurmas();
         
       }, [count]);
+
+
+    const botaoCadastrarTurma = () =>{
+        
+        setOpenDialog(true);
+    }
+
 
     const ativarEffect = () =>{
         setCount(count + 1);
@@ -48,6 +80,8 @@ const TelaTurmas = () => {
   
     return (
         <main className='mainPage'>
+
+        
 
             <DialogInserirTurma
 
@@ -63,7 +97,16 @@ const TelaTurmas = () => {
 
             <h1 className='titlePage'>Turmas Cadastradas</h1>
 
-            <div className='divInputsMain'></div>
+            <div className='divInputsMain'>
+                {loading && <div className="spinner"></div>}
+                {semTurma && <p>não há turmas cadastradas</p>}
+
+                {turmas.length>0 && turmas.map(turma => (
+                    <li key={turma.id}>{turma.nome_turma}</li>
+                ))}
+
+                
+            </div>
 
             
 

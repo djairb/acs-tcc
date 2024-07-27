@@ -27,7 +27,7 @@ export default function Card(props) {
                 id={props.id}
             />
 
-            <div className="containerCard" onClick={() =>
+            <div className="containerCardTurma" onClick={() =>
 
                 handleClickCard()
 
@@ -37,15 +37,7 @@ export default function Card(props) {
                 <h1>{props.nome}</h1>
                 <h3>{props.id}</h3>
 
-                <div className="containerDetalhes">
-
-                    <p>{props.categoria}</p>
-
-                    <p>•</p>
-
-                    <p>{props.preco}</p>
-
-                </div>
+               
 
             </div>
 

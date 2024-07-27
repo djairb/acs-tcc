@@ -46,7 +46,7 @@ export default function DialogInserirTurma(props) {
           alert("Ocorreu um erro ao tentar fazer login. Por favor, tente novamente mais tarde.");
         }
         handleClose();
-      };
+    };
 
     return (
 
