@@ -3,7 +3,7 @@ import '../../style/style.css';
 import { useNavigate } from 'react-router-dom';
 
 import { UserContext } from '../../context/UserContext';
-import DialogInserirTurma from '../../componentes/DialogInserirTurma/DialogInserirTurma';
+import DialogInserirTurma from '../../componentes/dialogInserirTurma/dialogInserirTurma';
 
 
 const TelaTurmas = () => {
@@ -11,6 +11,14 @@ const TelaTurmas = () => {
     const navigate = useNavigate();
 
     const {user} = useContext(UserContext);
+
+    useEffect(() => {
+
+        if(user.id_educador===null){
+            navigate('/login')
+        }
+        
+      }, [user]);
     
     const navegarBotaoVoltar = () =>{
 
@@ -22,15 +30,19 @@ const TelaTurmas = () => {
     const botaoCadastrarTurma = () =>{
 
         setOpenDialog(true);
-    }
+    }    
+
+    const [count, setCount] = useState(0);
 
     useEffect(() => {
-
-        if(user.id_educador===null){
-            navigate('/login')
-        }
+        // Código que deve ser executado quando `count` mudar
+        console.log(`O valor de count é ${count}`);
         
-      }, [user]);
+      }, [count]);
+
+    const ativarEffect = () =>{
+        setCount(count + 1);
+    }
 
    
   
@@ -42,6 +54,8 @@ const TelaTurmas = () => {
                 open={openDialog}
                 setOpenDialog={setOpenDialog}
                 id_educador = {user.id_educador}
+                // passar a função pra ativar o effect que faz a requisição de novo
+                ativarEffect = {ativarEffect}
 
             
             

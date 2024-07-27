@@ -14,37 +14,14 @@ import { useForm } from 'react-hook-form';
 export default function DialogInserirTurma(props) {
 
 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
-
-    const handleInserirTurma = () => {
-
-        ///http://localhost:3001/edit
-        //https://somosconexaosocial.org/appcrud/edit
-        // Axios.put("http://localhost:3001/edit", {
-
-        //     //pega os valores que estao setados em editValues - que sao setados quando o cara altera no onchange
-
-        //     //ele cria dinamicamente o objeto no insert, mas aqui, precisa criar um objeto no state e atualizar ele na medida que o dialog muda, e depois, manda pra o banco
-        //     id: editValues.id,
-        //     nome: editValues.nome,
-        //     preco: editValues.preco,
-        //     categoria: editValues.categoria
-
-        // });
-        // handleClose();
-        // document.location.reload();
-        console.log("Jesus")
-
-        
-
-
-    };
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();    
 
 
 
     const handleClose = () => {
         reset();
         props.setOpenDialog(false);
+       
         
         
     };
@@ -60,12 +37,15 @@ export default function DialogInserirTurma(props) {
             turno: data.turno,
             id_educador: props.id_educador
           });
+
+          props.ativarEffect();
           
           
         } catch (error) {
           console.error('Erro ao tentar fazer login:', error);
           alert("Ocorreu um erro ao tentar fazer login. Por favor, tente novamente mais tarde.");
         }
+        handleClose();
       };
 
     return (
