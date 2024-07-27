@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import '../../style/style.css';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { UserContext } from '../../context/UserContext';
 
@@ -65,7 +65,15 @@ const TelaDetalheTurma = () => {
         //   console.error('Erro ao tentar fazer login:', error);
         //   alert("Ocorreu um erro ao tentar fazer login. Por favor, tente novamente mais tarde.");
         // }
-      };
+    };
+
+    const location = useLocation();
+
+    //turma que vem da lista, com todos os campos do banco. pra preencher os dados e editar ou deletar pelos botoes
+
+    const { turma } = location.state;
+
+   
 
     
   
@@ -81,6 +89,7 @@ const TelaDetalheTurma = () => {
 
                 <input
                     type='text'
+                    defaultValue={turma.nome_turma}
                     placeholder='Nome da turma'
                     className={errors.nome_turma && "input-error"}
                     {...register('nome_turma', { required: true })}      
@@ -92,16 +101,16 @@ const TelaDetalheTurma = () => {
                 <select
 
                     className={errors.projeto && "input-error"}
-                    defaultValue="0"
+                    defaultValue={turma.projeto}
                     {...register("projeto", { validate: (value) => value !== "0" })}
                 >
                     <option value="0">Selecionar Projeto</option>
-                    <option value="conectaVidas">Conecta Vidas</option>
-                    <option value="passaporteDigital">Passaporte Digital</option>
-                    <option value="centroFormacao">Centro de Formação</option>
-                    <option value="oportunizarUrbano">Oportunizar Urbano</option>
-                    <option value="oportunizarRural">Oportunizar Rural</option>
-                    <option value="vamoSimbora">VamoSimbora</option>
+                    <option value="Conecta Vidas">Conecta Vidas</option>
+                    <option value="Passaporte Digital">Passaporte Digital</option>
+                    <option value="Centro Formação">Centro de Formação</option>
+                    <option value="Oportunizar Urbano">Oportunizar Urbano</option>
+                    <option value="Oportunizar Rural">Oportunizar Rural</option>
+                    <option value="VamoSimbora?">VamoSimbora</option>
                 </select>
                 {errors?.projeto?.type === "validate" && (<p className="error-message">Selecione um Projeto</p>)}
 
@@ -110,13 +119,13 @@ const TelaDetalheTurma = () => {
                 <select
 
                     className={errors.turno && "input-error"}
-                    defaultValue="0"
+                    defaultValue={turma.turno}
                     {...register("turno", { validate: (value) => value !== "0" })}
                 >
                     <option value="0">Selecionar Turno</option>
-                    <option value="manha">Manhã</option>
-                    <option value="tarde">Tarde</option>
-                    <option value="noite">Noite</option>
+                    <option value="Manhã">Manhã</option>
+                    <option value="Tarde">Tarde</option>
+                    <option value="Noite">Noite</option>
                     
                 </select>
                 {errors?.turno?.type === "validate" && (<p className="error-message">Selecione um Turno</p>)}

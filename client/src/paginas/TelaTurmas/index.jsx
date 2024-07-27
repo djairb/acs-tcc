@@ -111,9 +111,11 @@ const TelaTurmas = () => {
                     <CardTurma
 
                         key={turma.id_turma}
+                        id_turma={turma.id_turma}
                         nome_turma={turma.nome_turma}
                         projeto={turma.projeto}
-                        turno={turma.turno} 
+                        turno={turma.turno}
+                        id_educador={turma.id_educador} 
                     
                     
                     />

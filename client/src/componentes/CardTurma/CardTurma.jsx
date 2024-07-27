@@ -1,16 +1,20 @@
 import React from "react";
 import '../../style/style.css';
-import FormDialog from "../dialog/dialogForm";
+import { useNavigate } from 'react-router-dom';
 
 export default function CardTurma(props) {
 
-    const [open, setOpen] = React.useState(false);
+    const navigate = useNavigate();
+
+
 
     const handleClickCard = () => {
 
         //abre o dialog, seta os valores automaticamente
-        setOpen(true)
+        navigate('/tela-detalhe-turma', { state: { turma: props } });
     }
+
+    
 
 
     return (
