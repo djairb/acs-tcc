@@ -6,6 +6,7 @@ import { UserContext } from '../../context/UserContext';
 import DialogInserirTurma from '../../componentes/dialogInserirTurma/dialogInserirTurma';
 
 import Axios from 'axios';
+import CardTurma from '../../componentes/CardTurma/CardTurma';
 
 
 const TelaTurmas = () => {
@@ -102,7 +103,17 @@ const TelaTurmas = () => {
                 {semTurma && <p>não há turmas cadastradas</p>}
 
                 {turmas.length>0 && turmas.map(turma => (
-                    <li key={turma.id}>{turma.nome_turma}</li>
+
+                    <CardTurma
+
+                        key={turma.id_turma}
+                        nome_turma={turma.nome_turma}
+                        projeto={turma.projeto}
+                        turno={turma.turno} 
+                    
+                    
+                    />
+     
                 ))}
 
                 

@@ -133,14 +133,14 @@
   width: 90%;
   border-bottom: 2px solid #f1892a;
   border-top: 2px solid #f1892a;
-	padding-bottom: 5px;
+	padding: 5px;
 
   display: flex;
   flex: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 20px;
 }
 
 .divInputsDialog{
@@ -278,6 +278,35 @@
   animation: spin 2s linear infinite;
 }
 
+.containerCardTurma{
+  width: 60%;
+  border: 2px solid #f1892a;
+  height: 150px;
+  cursor: pointer;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  
+}
+
+.containerCardTurma div{
+  display: flex;
+  gap: 20px;
+  
+  
+}
+
+
+.containerCardTurma:hover{
+  background-color: #f1892a;
+  color: white;
+  
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -311,6 +340,37 @@
   .divInputsDialog input, .divInputsDialog select{
     width: 100%;
     margin: 0 auto;
+  }
+
+  .containerCardTurma{
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    gap: 10px;
+    
+    
+  
+    
+  }
+
+  
+  .containerCardTurma h1{
+    text-align: center;  
+    
+  
+    
+  }
+  
+  .containerCardTurma div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    gap: 2px;
+    
+    
   }
   
 

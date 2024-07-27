@@ -74,12 +74,12 @@ export default function DialogInserirTurma(props) {
                             {...register("projeto", { validate: (value) => value !== "0" })}
                         >
                             <option value="0">Selecionar Projeto</option>
-                            <option value="conectaVidas">Conecta Vidas</option>
-                            <option value="passaporteDigital">Passaporte Digital</option>
-                            <option value="centroFormacao">Centro de Formação</option>
-                            <option value="oportunizarUrbano">Oportunizar Urbano</option>
-                            <option value="oportunizarRural">Oportunizar Rural</option>
-                            <option value="vamoSimbora">VamoSimbora</option>
+                            <option value="Conecta Vidas">Conecta Vidas</option>
+                            <option value="Passaporte Digital">Passaporte Digital</option>
+                            <option value="Centro Formação">Centro de Formação</option>
+                            <option value="Oportunizar Urbano">Oportunizar Urbano</option>
+                            <option value="Oportunizar Rural">Oportunizar Rural</option>
+                            <option value="VamoSimbora?">VamoSimbora</option>
                         </select>
                         {errors.projeto && <p className="error-message">Selecione um Projeto</p>}
 
@@ -90,9 +90,9 @@ export default function DialogInserirTurma(props) {
                             {...register("turno", { validate: (value) => value !== "0" })}
                         >
                             <option value="0">Selecionar Turno</option>
-                            <option value="manha">Manhã</option>
-                            <option value="tarde">Tarde</option>
-                            <option value="noite">Noite</option>
+                            <option value="Manhã">Manhã</option>
+                            <option value="Tarde">Tarde</option>
+                            <option value="Noite">Noite</option>
                         </select>
                         {errors.turno && <p className="error-message">Selecione um Turno</p>}
                     </div>

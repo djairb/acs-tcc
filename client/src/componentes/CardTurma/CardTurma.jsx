@@ -2,7 +2,7 @@ import React from "react";
 import '../../style/style.css';
 import FormDialog from "../dialog/dialogForm";
 
-export default function Card(props) {
+export default function CardTurma(props) {
 
     const [open, setOpen] = React.useState(false);
 
@@ -16,16 +16,6 @@ export default function Card(props) {
     return (
 
         <>
-            <FormDialog
-                open={open}
-                setOpen={setOpen}
-                nome={props.nome}
-                preco={props.preco}
-                categoria={props.categoria}
-                listCard={props.listCard}
-                setListCard={props.setListCard}
-                id={props.id}
-            />
 
             <div className="containerCardTurma" onClick={() =>
 
@@ -34,8 +24,21 @@ export default function Card(props) {
 
             }>
 
-                <h1>{props.nome}</h1>
-                <h3>{props.id}</h3>
+                <h1>{props.nome_turma}</h1>
+
+                <div>
+                    
+                    <h3>Projeto: {props.projeto}</h3>
+
+                    <h3>•</h3>
+
+                    <h3>Turno: {props.turno}</h3>
+
+
+
+
+                </div>
+                
 
                
 
