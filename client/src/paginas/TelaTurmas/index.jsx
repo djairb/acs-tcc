@@ -48,7 +48,11 @@ const TelaTurmas = () => {
 
             try {
                 
-                const response = await Axios.get('http://localhost:3001/getTurmas');
+                const response = await Axios.get('http://localhost:3001/getTurmaById', {
+                    params: {
+                        id: user.id_educador
+                    }
+                });
                 setTurmas(response.data);
                 setSemTurma(response.data.length === 0);
                 setLoading(false);

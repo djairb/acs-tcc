@@ -199,6 +199,29 @@ app.get("/getTurmas", (req, res) =>{
 
 
 
+app.get("/getTurmaById", (req, res) =>{
+
+    const { id } = req.query;
+
+
+    let SQL= "SELECT * FROM turmas WHERE id_educador = ?";
+
+    db.query(SQL, [id], (err, result) => {
+
+        if (err) {
+            console.log(err);
+            res.status(500).send("Erro ao consultar banco de dados");
+        } else {
+            
+            res.send(result);
+            
+        }
+    });
+
+});
+
+
+
 
 
 
