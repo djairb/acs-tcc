@@ -3,8 +3,8 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 import { UserProvider } from "../context/UserContext";
 
 import TelaLogin from "../paginas/TelaLogin";
-import TelaCrud from "../paginas/TelaCRUD";
-import LoginForm from "../paginas/TelaLogin2";
+
+
 import TelaHomeEducador from "../paginas/TelaHomeEducador";
 import TelaTurmas from "../paginas/TelaTurmas";
 
