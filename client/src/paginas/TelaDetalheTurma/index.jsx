@@ -117,6 +117,7 @@ const TelaDetalheTurma = () => {
                 <label>Turno:</label>
 
                 <select
+                
 
                     className={errors.turno && "input-error"}
                     defaultValue={turma.turno}
