@@ -32,11 +32,23 @@ const TelaDetalheTurma = () => {
         navigate('/home-educador');
     }
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors, setError }} = useForm();
+
+    const [listaAlunos, setListaAlunos] = useState([]);
 
     const onSubmit = async (data) => {
+
+        if (listaAlunos.length === 0) {
+            alert("Sem alunos cadastrados")
+            return;
+        }
+
+        alert("eita")
+
         
-        console.log(data);
+        
+
+        
 
         // try {
         //   const response = await Axios.post("http://localhost:3001/getUserLogin", {
@@ -73,6 +85,9 @@ const TelaDetalheTurma = () => {
 
     const [turmaBanco, setTurmaBanco] = useState(false); 
     //objeto são true, estando falsos ou não
+
+    
+
 
     useEffect(() => {
         // Código que deve ser executado quando `count` mudar
@@ -118,7 +133,7 @@ const TelaDetalheTurma = () => {
         carregarTurma();
         //
         
-      }, [objetoTurma.id, objetoTurma.isCadastrada]);
+      }, []);
 
     
 
@@ -181,6 +196,9 @@ const TelaDetalheTurma = () => {
                 {errors?.turno?.type === "validate" && (<p className="error-message">Selecione um Turno</p>)}
 
                 <label>Alunos</label>
+
+                {listaAlunos.length === 0 && <p>sem alunos cadastrados</p>}
+
 
 
             </div>
