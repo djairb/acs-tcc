@@ -49,8 +49,7 @@ export default function DialogInserirTurma(props) {
     };
 
     return (
-
-
+        
         <Dialog open={props.open} onClose={handleClose} aria-labelledby='form-dialog-title'>
             <DialogTitle id="form-dialog-title">Cadastrar Turma</DialogTitle>
             <DialogContent>

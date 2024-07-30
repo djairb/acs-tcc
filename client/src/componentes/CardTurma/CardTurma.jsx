@@ -12,6 +12,7 @@ export default function CardTurma(props) {
 
         //abre o dialog, seta os valores automaticamente
         navigate('/tela-detalhe-turma', { state: { turma: props } });
+        // passa o objeto pra ela pre-carregar. se tiver id o botao salvar dela vai chamar atualizar. se não, vai cadastrar a turma jogando os dados e a lista de alunos pro banco (não aceita no front cadastro sem turma -- não existe turma sem aluno)
     }
 
     

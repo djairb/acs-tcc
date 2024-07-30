@@ -199,7 +199,7 @@ app.get("/getTurmas", (req, res) =>{
 
 
 
-app.get("/getTurmaById", (req, res) =>{
+app.get("/getAllTurmasByIdEducador", (req, res) =>{
 
     const { id } = req.query;
 
@@ -219,6 +219,29 @@ app.get("/getTurmaById", (req, res) =>{
     });
 
 });
+
+
+app.get("/getTurmaByIdEducador", (req, res) =>{
+
+    const { id_educador, id_turma } = req.query;
+
+
+    let SQL= "SELECT * FROM turmas WHERE id_educador = ? AND id_turma = ?";
+
+    db.query(SQL, [id_educador, id_turma], (err, result) => {
+
+        if (err) {
+            console.log(err);
+            res.status(500).send("Erro ao consultar banco de dados");
+        } else {
+            
+            res.send(result);
+            
+        }
+    });
+
+});
+
 
 
 

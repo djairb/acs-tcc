@@ -9,6 +9,7 @@ import Axios from 'axios';
 import CardTurma from '../../componentes/CardTurma/CardTurma';
 
 
+
 const TelaTurmas = () => {
 
     const navigate = useNavigate();
@@ -34,6 +35,15 @@ const TelaTurmas = () => {
     
     const [turmas, setTurmas] = useState([]);
 
+    const [objetoTurma, setObjetoTurma] = useState({
+
+        isCadastrada: false, //variavel pra saber se esse objeto é de uma turma cadastrada
+        id_turma: null
+        
+
+
+    });
+
     const [count, setCount] = useState(0);
 
     const [loading, setLoading] = useState(false);
@@ -48,7 +58,7 @@ const TelaTurmas = () => {
 
             try {
                 
-                const response = await Axios.get('http://localhost:3001/getTurmaById', {
+                const response = await Axios.get('http://localhost:3001/getAllTurmasByIdEducador', {
                     params: {
                         id: user.id_educador
                     }
@@ -67,13 +77,19 @@ const TelaTurmas = () => {
         };
 
         carregarTurmas();
+        //
         
       }, [count]);
 
 
-    const botaoCadastrarTurma = () =>{
+    const botaoNavegarPaginaTurma = () =>{
+
         
-        setOpenDialog(true);
+    
+        
+        // setOpenDialog(true);
+        navigate('/tela-detalhe-turma', { state: objetoTurma });
+        // passa o objeto pra ela pre-carregar. se tiver id o botao salvar dela vai chamar atualizar. se não, vai cadastrar a turma jogando os dados e a lista de alunos pro banco (não aceita no front cadastro sem turma -- não existe turma sem aluno
     }
 
 
@@ -84,9 +100,7 @@ const TelaTurmas = () => {
    
   
     return (
-        <main className='mainPage'>
-
-        
+        <main className='mainPage'>        
 
             <DialogInserirTurma
 
@@ -131,7 +145,7 @@ const TelaTurmas = () => {
 
                 <button className='botaoInputs' onClick={navegarBotaoVoltar}>Voltar</button>
 
-                <button className='botaoInputs' onClick={botaoCadastrarTurma}>Inserir  Turma</button>
+                <button className='botaoInputs' onClick={botaoNavegarPaginaTurma}>Inserir  Turma</button>
 
 
             </div>

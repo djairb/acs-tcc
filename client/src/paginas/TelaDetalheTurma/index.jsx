@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../../style/style.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -19,8 +19,6 @@ const TelaDetalheTurma = () => {
         }
         
       }, [user]);
-
-    useForm();
 
     const navigate = useNavigate();    
     
@@ -71,7 +69,58 @@ const TelaDetalheTurma = () => {
 
     //turma que vem da lista, com todos os campos do banco. pra preencher os dados e editar ou deletar pelos botoes
 
-    const { turma } = location.state;
+    const [objetoTurma, setObjetoTurma] = useState(location.state);
+
+    const [turmaBanco, setTurmaBanco] = useState(false); 
+    //objeto são true, estando falsos ou não
+
+    useEffect(() => {
+        // Código que deve ser executado quando `count` mudar
+        const carregarTurma = async () => {
+
+            if(objetoTurma !== undefined && objetoTurma.isCadastrada){
+                try {
+                
+                    const response = await Axios.get('http://localhost:3001/getTurmaById', {
+                        params: {
+                            id_educador: user.id_educador,
+                            id_turma: objetoTurma.id_turma
+                        }
+                    });
+    
+                    {response.data.length === 0 && setTurmaBanco(response.data)}
+                    
+                  
+            
+                } catch (error) {
+                  console.error('Erro ao tentar fazer login:', error);
+                  alert("Ocorreu um erro. Por favor, tente novamente mais tarde.");
+                }
+            }else{
+
+                setObjetoTurma({
+
+                    isCadastrada: false, 
+                    id_turma: null
+
+                    //setei ela como padrão.
+                    
+            
+            
+                });
+
+            }
+            
+
+            
+        };
+
+        carregarTurma();
+        //
+        
+      }, [objetoTurma.id, objetoTurma.isCadastrada]);
+
+    
 
    
 
@@ -89,7 +138,7 @@ const TelaDetalheTurma = () => {
 
                 <input
                     type='text'
-                    defaultValue={turma.nome_turma}
+                    defaultValue={objetoTurma.isCadastrada ? turmaBanco.nome_turma : ""}
                     placeholder='Nome da turma'
                     className={errors.nome_turma && "input-error"}
                     {...register('nome_turma', { required: true })}      
@@ -101,7 +150,7 @@ const TelaDetalheTurma = () => {
                 <select
 
                     className={errors.projeto && "input-error"}
-                    defaultValue={turma.projeto}
+                    defaultValue={objetoTurma.isCadastrada ? turmaBanco.projeto : "0"}
                     {...register("projeto", { validate: (value) => value !== "0" })}
                 >
                     <option value="0">Selecionar Projeto</option>
@@ -120,7 +169,7 @@ const TelaDetalheTurma = () => {
                 
 
                     className={errors.turno && "input-error"}
-                    defaultValue={turma.turno}
+                    defaultValue={objetoTurma.isCadastrada ? turmaBanco.turno : "0"}
                     {...register("turno", { validate: (value) => value !== "0" })}
                 >
                     <option value="0">Selecionar Turno</option>
