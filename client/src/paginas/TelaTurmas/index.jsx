@@ -38,8 +38,7 @@ const TelaTurmas = () => {
     const [objetoTurma, setObjetoTurma] = useState({
 
         isCadastrada: false, //variavel pra saber se esse objeto é de uma turma cadastrada
-        id_turma: null
-        
+        id_turma: null       
 
 
     });
@@ -52,6 +51,8 @@ const TelaTurmas = () => {
 
     useEffect(() => {
         // Código que deve ser executado quando `count` mudar
+
+        // nao use useEffect pra renderizar componente.
         const carregarTurmas = async () => {
             
             setLoading(true);
@@ -110,8 +111,6 @@ const TelaTurmas = () => {
                 // passar a função pra ativar o effect que faz a requisição de novo
                 ativarEffect = {ativarEffect}
 
-            
-            
             />
 
             <h1 className='titlePage'>Turmas Cadastradas</h1>

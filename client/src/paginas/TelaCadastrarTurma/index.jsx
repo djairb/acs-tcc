@@ -7,41 +7,50 @@ import { UserContext } from '../../context/UserContext';
 import { useForm } from 'react-hook-form';
 
 import Axios from "axios";
+import DialogInserirAlunoArray from '../../componentes/dialogInserirAlunoArray/DialogInserirAlunoArray';
 
 const TelaCadastrarTurma = () => {
 
-    const {user} = useContext(UserContext);
+    const { user } = useContext(UserContext);
+
+    const [localIndex, setLocalIndex] = useState(1);
+
+    ///local index vai ser adicionado ao array local (que é usado antes de subir pro banco), assim, editar e remover podem ser feitos usando esse index.
 
     useEffect(() => {
 
-        if(user.id===null){
+        if (user.id === null) {
             navigate('/login')
         }
-        
-      }, [user]);
 
-    const navigate = useNavigate();    
-    
-    const navegarBotaoVoltar = () =>{
+    }, [user]);
+
+    const navigate = useNavigate();
+
+    const navegarBotaoVoltar = () => {
 
         navigate('/tela-turmas');
     }
-    
-    const navegarBotaoCadastrarTurma = () =>{
+
+    const inserirAluno = () => {
+
+        setOpenDialog(true);
+    }
+
+    const navegarBotaoCadastrarTurma = () => {
 
         navigate('/home-educador');
     }
 
-    const { register, handleSubmit, formState: { errors, setError }} = useForm();
+    const { register, handleSubmit, formState: { errors, setError } } = useForm();
 
-    let listaAlunos = [];
+    const [listaAlunos, setListaAlunos] = useState([]);
 
-    const adicionarAluno = (aluno) =>{
+    const [openDialog, setOpenDialog] = useState(false);
 
-        listaAlunos.push(aluno);
-    
-    
-    }
+    const adicionarAluno = (novoAluno) => {
+        setListaAlunos((prevAlunos) => [...prevAlunos, novoAluno]);
+    };
 
     const onSubmit = async (data) => {
 
@@ -50,10 +59,10 @@ const TelaCadastrarTurma = () => {
             return; //retornar depois de verificar que a lista local ta vazia
         }
 
-        alert("eita")    
-        
+        alert("eita")
 
-        
+
+
 
         // try {
         //   const response = await Axios.post("http://localhost:3001/getUserLogin", {
@@ -61,15 +70,15 @@ const TelaCadastrarTurma = () => {
         //     senha: data.senha,
         //     tipoUsuario: data.tipoUsuario
         //   });
-          
+
         //   if ((response.data.length)>0) {
         //     toggleUser(response.data[0]);
         //     setLoginError(false);
         //     console.log(user);
         //     {data.tipoUsuario==="educador" ? navigate('/home-educador') : alert("Tela Coord ainda não existe")}
-            
-           
-            
+
+
+
         //     // data ta sendo lido depois que response retorna positivo. então data existe no banco.
         //     // navigate('/pagina-crud', { state: response.data.usuario }); // Exemplo de passagem de dados para a próxima página
         //   } else {
@@ -85,9 +94,23 @@ const TelaCadastrarTurma = () => {
     const location = useLocation();
 
     //turma que vem da lista, com todos os campos do banco. pra preencher os dados e editar ou deletar pelos botoes  
-  
+
     return (
         <main className='mainPage'>
+
+            <DialogInserirAlunoArray
+
+                open={openDialog}
+
+                setOpenDialog={setOpenDialog}
+
+                localIndex={localIndex}
+
+                setLocalIndex={setLocalIndex}
+
+                adicionarAluno={adicionarAluno}
+
+            />
 
             <h1 className='titlePage'>Cadastrar Turma</h1>
 
@@ -100,7 +123,7 @@ const TelaCadastrarTurma = () => {
                     type='text'
                     placeholder='Nome da turma'
                     className={errors.nome_turma && "input-error"}
-                    {...register('nome_turma', { required: true })}      
+                    {...register('nome_turma', { required: true })}
                 />
                 {errors.nome_turma && <p className="error-message">Nome da turma é obrigatório</p>}
 
@@ -125,7 +148,7 @@ const TelaCadastrarTurma = () => {
                 <label>Turno:</label>
 
                 <select
-                
+
 
                     className={errors.turno && "input-error"}
                     defaultValue="0"
@@ -135,25 +158,31 @@ const TelaCadastrarTurma = () => {
                     <option value="Manhã">Manhã</option>
                     <option value="Tarde">Tarde</option>
                     <option value="Noite">Noite</option>
-                    
+
                 </select>
                 {errors?.turno?.type === "validate" && (<p className="error-message">Selecione um Turno</p>)}
 
                 <label>Alunos</label>
 
-                {listaAlunos.length === 0 && <p>sem alunos cadastrados</p>}
+
+                {listaAlunos.length === 0 ? <p>sem alunos cadastrados</p> :
+
+                    listaAlunos.map(aluno => (
+
+                        <p>{aluno.nome_aluno}</p>
+
+
+
+                    ))
+                }
 
             </div>
-
-            
-
-                 
-
-            
 
             <div className='divBotoesInputs'>
 
                 <button className='botaoInputs' onClick={navegarBotaoVoltar}>Voltar</button>
+
+                <button className='botaoInputs' onClick={inserirAluno}>Inserir Aluno</button>
 
                 <button className='botaoInputs' onClick={() => handleSubmit(onSubmit)()}>Salvar</button>
 
