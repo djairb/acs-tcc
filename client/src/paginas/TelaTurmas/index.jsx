@@ -88,8 +88,8 @@ const TelaTurmas = () => {
     
         
         // setOpenDialog(true);
-        navigate('/tela-detalhe-turma', { state: objetoTurma });
-        // passa o objeto pra ela pre-carregar. se tiver id o botao salvar dela vai chamar atualizar. se não, vai cadastrar a turma jogando os dados e a lista de alunos pro banco (não aceita no front cadastro sem turma -- não existe turma sem aluno
+        navigate('/tela-cadastrar-turma', { state: objetoTurma });
+        
     }
 
 
