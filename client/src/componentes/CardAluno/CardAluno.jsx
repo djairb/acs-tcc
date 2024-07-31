@@ -2,11 +2,9 @@ import React from "react";
 import '../../style/style.css';
 import { useNavigate } from 'react-router-dom';
 
-export default function CardTurma(props) {
+export default function CardAluno(props) {
 
     const navigate = useNavigate();
-
-
 
     const handleClickCard = () => {
 
@@ -14,9 +12,7 @@ export default function CardTurma(props) {
         navigate('/tela-detalhe-turma', { state: { turma: props } });
 
       
-    }
-
-    
+    }   
 
 
     return (
@@ -30,21 +26,7 @@ export default function CardTurma(props) {
 
             }>
 
-                <h1>{props.nome_turma}</h1>
-
-                <div>
-                    
-                    <h3>Projeto: {props.projeto}</h3>
-
-                    <h3>•</h3>
-
-                    <h3>Turno: {props.turno}</h3>
-
-
-
-
-                </div>
-                
+                <h1>{props.nome_aluno}</h1>                
 
                
 

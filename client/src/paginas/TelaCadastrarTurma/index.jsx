@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 
 import Axios from "axios";
 import DialogInserirAlunoArray from '../../componentes/dialogInserirAlunoArray/DialogInserirAlunoArray';
+import CardAluno from '../../componentes/CardAluno/CardAluno';
 
 const TelaCadastrarTurma = () => {
 
@@ -169,7 +170,12 @@ const TelaCadastrarTurma = () => {
 
                     listaAlunos.map(aluno => (
 
-                        <p>{aluno.nome_aluno}</p>
+                        <CardAluno
+
+                            nome_aluno={aluno.nome_aluno}
+                        
+                        
+                        />
 
 
 

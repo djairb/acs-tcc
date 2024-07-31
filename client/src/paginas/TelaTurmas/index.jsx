@@ -53,6 +53,7 @@ const TelaTurmas = () => {
         // Código que deve ser executado quando `count` mudar
 
         // nao use useEffect pra renderizar componente.
+        //usa ele aqui pra atualizar a lista que recebe a requisição - quando um componente é adicionado
         const carregarTurmas = async () => {
             
             setLoading(true);
