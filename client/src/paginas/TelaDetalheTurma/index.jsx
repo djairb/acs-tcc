@@ -34,7 +34,14 @@ const TelaDetalheTurma = () => {
 
     const { register, handleSubmit, formState: { errors, setError }} = useForm();
 
-    const [listaAlunos, setListaAlunos] = useState([]);
+    let listaAlunos = [];
+
+    const adicionarAluno = (aluno) =>{
+
+        listaAlunos.push(aluno);
+    
+    
+    }
 
     const onSubmit = async (data) => {
 
