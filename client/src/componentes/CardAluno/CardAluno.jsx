@@ -19,14 +19,25 @@ export default function CardAluno(props) {
 
         <>
 
-            <div className="containerCardTurma" onClick={() =>
+            <div className="containerCardAluno" onClick={() =>
 
                 handleClickCard()
 
 
             }>
 
-                <h1>{props.nome_aluno}</h1>                
+                <h1>{props.nome_aluno}</h1>
+
+                <div>
+
+                    <p>Idade: {props.idade}</p>
+                    <p>•</p>
+                    <p>Contato: {props.idade}</p>
+
+
+                    
+                    
+                </div>                
 
                
 

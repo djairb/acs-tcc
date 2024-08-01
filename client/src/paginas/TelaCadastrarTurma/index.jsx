@@ -173,6 +173,8 @@ const TelaCadastrarTurma = () => {
                         <CardAluno
 
                             nome_aluno={aluno.nome_aluno}
+                            idade={aluno.idade}
+                            telefone={aluno.telefone}
                         
                         
                         />

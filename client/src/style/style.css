@@ -278,7 +278,7 @@
   animation: spin 2s linear infinite;
 }
 
-.containerCardTurma{
+.containerCardTurma, .containerCardAluno{
   width: 60%;
   border: 2px solid #f1892a;
   height: 150px;
@@ -293,7 +293,26 @@
   
 }
 
-.containerCardTurma div{
+.containerCardAluno{
+  max-width: 500px;
+  border: none;
+  border-bottom: 3px solid #f1892a;
+  border-top: 1px solid #f1892a;;
+  height: 100px;
+  cursor: pointer;
+  gap: 10px;
+  
+ 
+
+  
+}
+
+.containerCardAluno h1{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.containerCardTurma div, .containerCardAluno div{
   display: flex;
   gap: 20px;
   
@@ -301,7 +320,7 @@
 }
 
 
-.containerCardTurma:hover{
+.containerCardTurma:hover, .containerCardAluno:hover {
   background-color: #f1892a;
   color: white;
   
