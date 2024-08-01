@@ -295,6 +295,7 @@
 
 .containerCardAluno{
   max-width: 500px;
+  width: 100%;
   border: none;
   border-bottom: 3px solid #f1892a;
   border-top: 1px solid #f1892a;;
@@ -356,7 +357,7 @@
     
   }
 
-  .divInputsDialog input, .divInputsDialog select{
+  .divInputsDialog input, .divInputsDialog select, .divInputsMain input, .divInputsMain select{
     width: 100%;
     margin: 0 auto;
   }

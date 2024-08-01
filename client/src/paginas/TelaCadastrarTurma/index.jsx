@@ -53,6 +53,23 @@ const TelaCadastrarTurma = () => {
         setListaAlunos((prevAlunos) => [...prevAlunos, novoAluno]);
     };
 
+    const editarAlunos = (id, novosDados) => {
+        setListaAlunos(prevLista => {
+            const index = prevLista.findIndex(item => item.id === id);
+            if (index !== -1) {
+                // Cria uma nova lista com o aluno atualizado
+                const novaLista = [...prevLista];
+                novaLista[index] = { ...novaLista[index], ...novosDados };
+                return novaLista;
+            } else {
+                console.log('Objeto com o ID fornecido não encontrado.');
+                return prevLista; // Retorna a lista original se o ID não for encontrado
+            }
+        });
+    };
+    
+
+
     const onSubmit = async (data) => {
 
         if (listaAlunos.length === 0) {
@@ -165,16 +182,21 @@ const TelaCadastrarTurma = () => {
 
                 <label>Alunos</label>
 
+                {console.log(listaAlunos)}
 
                 {listaAlunos.length === 0 ? <p>sem alunos cadastrados</p> :
 
-                    listaAlunos.map(aluno => (
+                    listaAlunos.map(aluno => (                        
 
                         <CardAluno
 
+                            key={aluno.id}
+                            id={aluno.id}
                             nome_aluno={aluno.nome_aluno}
                             idade={aluno.idade}
-                            telefone={aluno.telefone}
+                            contato={aluno.contato}
+                            editarAlunos={editarAlunos}
+                            
                         
                         
                         />
