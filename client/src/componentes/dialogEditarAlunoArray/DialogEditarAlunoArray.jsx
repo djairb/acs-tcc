@@ -27,11 +27,22 @@ export default function DialogEditarAlunoArray(props) {
 
     const handleClose2 = () => {
 
-        props.setNumero(props.numero + 1);      
+        props.setNumero(props.numero + 1);  
+          
         
                
         
     };
+
+    const deletarAlunoById = () => {
+
+        props.deletarAluno(props.id);
+
+        handleClose2();
+
+
+
+    }
 
     return (
         
@@ -50,22 +61,22 @@ export default function DialogEditarAlunoArray(props) {
                         />
                         {errors.nome_aluno && <p className="error-message">Nome do aluno é obrigatório</p>}
 
-                        <label>Contato:</label>
+                        <label>Telefone:</label>
 
                         <input
                             type='text'
-                            placeholder='Contato'
-                            defaultValue={props.contato}
-                            className={errors.contato ? "input-error" : ""}
-                            {...register('contato', {
-                            required: "Contato é obrigatório",
+                            placeholder='Telefone'
+                            defaultValue={props.telefone}
+                            className={errors.telefone ? "input-error" : ""}
+                            {...register('telefone', {
+                            required: "Telefone é obrigatório",
                             pattern: {                
                                 value: /^[0-9() -]+$/, // Regex para permitir apenas números, parênteses, hífens e espaços
-                                message: "Contato deve conter apenas números, parênteses, hífens e espaços"
+                                message: "Telefone deve conter apenas números, parênteses, hífens e espaços"
                             }
                             })}
                         />
-                        {errors.contato && <p className="error-message">{errors.contato.message}</p>}
+                        {errors.telefone && <p className="error-message">{errors.telefone.message}</p>}
                         
 
                         <label>Idade do Aluno:</label>
@@ -87,8 +98,8 @@ export default function DialogEditarAlunoArray(props) {
 
                     <DialogActions>
                         <div className='divBotoesInputs botoesDialog'>
-                            <Button className='botaoInputs' type="submit">Salvar Edições</Button>
-                            <Button className='botaoInputs botaoExcluir' onClick={handleClose2}>Deletar</Button>
+                            <Button className='botaoInputs' type="submit">Salvar</Button>
+                            <Button className='botaoInputs botaoExcluir' onClick={deletarAlunoById}>Deletar</Button>
                             {/* <Button className='botaoInputs botaoExcluir' type="submit">Cancelar</Button> */}
                         </div>
                     </DialogActions>

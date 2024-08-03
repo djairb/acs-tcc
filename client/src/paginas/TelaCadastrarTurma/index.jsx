@@ -67,6 +67,20 @@ const TelaCadastrarTurma = () => {
             }
         });
     };
+
+    const deletarAluno = (id) => {
+        setListaAlunos(prevLista => {
+            // Filtra a lista para remover o aluno com o ID fornecido
+            const novaLista = prevLista.filter(item => item.id !== id);
+            
+            if (novaLista.length === prevLista.length) {
+                // Verifica se algum aluno foi removido
+                console.log('Objeto com o ID fornecido não encontrado.');
+            }
+    
+            return novaLista;
+        });
+    };
     
 
 
@@ -77,7 +91,10 @@ const TelaCadastrarTurma = () => {
             return; //retornar depois de verificar que a lista local ta vazia
         }
 
-        alert("eita")
+        console.log("-----")
+
+        console.log(data);
+        console.log(listaAlunos);
 
 
 
@@ -182,9 +199,7 @@ const TelaCadastrarTurma = () => {
 
                 <label>Alunos</label>
 
-                {console.log(listaAlunos)}
-
-                {listaAlunos.length === 0 ? <p>sem alunos cadastrados</p> :
+                {listaAlunos.length === 0 ? <p>Ainda sem alunos</p> :
 
                     listaAlunos.map(aluno => (                        
 
@@ -194,8 +209,9 @@ const TelaCadastrarTurma = () => {
                             id={aluno.id}
                             nome_aluno={aluno.nome_aluno}
                             idade={aluno.idade}
-                            contato={aluno.contato}
+                            telefone={aluno.telefone}
                             editarAlunos={editarAlunos}
+                            deletarAluno={deletarAluno}
                             
                         
                         
@@ -214,7 +230,7 @@ const TelaCadastrarTurma = () => {
 
                 <button className='botaoInputs' onClick={inserirAluno}>Inserir Aluno</button>
 
-                <button className='botaoInputs' onClick={() => handleSubmit(onSubmit)()}>Salvar</button>
+                <button className='botaoInputs' onClick={() => handleSubmit(onSubmit)()}>Cadastrar Turma</button>
 
 
             </div>

@@ -281,7 +281,7 @@
 .containerCardTurma, .containerCardAluno{
   width: 60%;
   border: 2px solid #f1892a;
-  height: 150px;
+  min-height: 150px;
   cursor: pointer;
   border-radius: 10px;
   display: flex;
@@ -299,9 +299,12 @@
   border: none;
   border-bottom: 3px solid #f1892a;
   border-top: 1px solid #f1892a;;
-  height: 100px;
+  min-height: 100px;
   cursor: pointer;
   gap: 10px;
+  
+  
+  
   
  
 
@@ -311,6 +314,7 @@
 .containerCardAluno h1{
   font-size: 1.5rem;
   font-weight: bold;
+  text-align: center;
 }
 
 .containerCardTurma div, .containerCardAluno div{
@@ -390,6 +394,17 @@
     margin: 0;
     gap: 2px;
     
+    
+  }
+
+  .containerCardAluno{
+    
+    
+    
+    gap: 2px;
+    
+   
+  
     
   }
   

@@ -52,15 +52,12 @@ export default function CardAluno(props) {
                     id={props.id}
                     nome_aluno={props.nome_aluno}
                     idade={props.idade}
-                    contato={props.contato}
+                    telefone={props.telefone}
                     editarAlunos={props.editarAlunos}
                     setNumero={setNumero}
                     numero={numero}
-                
-                
-                
-                
-                
+                    deletarAluno={props.deletarAluno}
+                          
                 
                 />
 
@@ -70,10 +67,7 @@ export default function CardAluno(props) {
 
                     <p>Idade: {props.idade}</p>
                     <p>•</p>
-                    <p>Contato: {props.idade}</p>
-
-
-                    
+                    <p>Telefone: {props.telefone}</p>                    
                     
                 </div>
 

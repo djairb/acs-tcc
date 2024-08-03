@@ -76,22 +76,22 @@ export default function DialogInserirAlunoArray(props) {
                         />
                         {errors.nome_aluno && <p className="error-message">Nome do aluno é obrigatório</p>}
 
-                        <label>Contato:</label>
+                        <label>Telefone:</label>
 
                         <input
                             type='text'
-                            placeholder='Contato'
+                            placeholder='Telefone'
                             defaultValue=''
-                            className={errors.contato ? "input-error" : ""}
-                            {...register('contato', {
-                            required: "Contato é obrigatório",
+                            className={errors.telefone ? "input-error" : ""}
+                            {...register('telefone', {
+                            required: "Telefone é obrigatório",
                             pattern: {                
                                 value: /^[0-9() -]+$/, // Regex para permitir apenas números, parênteses, hífens e espaços
-                                message: "Contato deve conter apenas números, parênteses, hífens e espaços"
+                                message: "Telefone deve conter apenas números, parênteses, hífens e espaços"
                             }
                             })}
                         />
-                        {errors.contato && <p className="error-message">{errors.contato.message}</p>}
+                        {errors.telefone && <p className="error-message">{errors.telefone.message}</p>}
                         
 
                         <label>Idade do Aluno:</label>
