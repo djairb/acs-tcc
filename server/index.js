@@ -157,26 +157,88 @@ app.post("/getUserLogin", (req, res) => {
 });
 
 
-app.post("/inserirTurma", (req, res) => {    
+// app.post("/inserirTurma", (req, res) => {    
 
-    let { nome_turma, projeto, turno, id_educador } = req.body;
+//     let { nome_turma, projeto, turno, id_educador } = req.body;
 
 
-    let SQL = 'insert into Turmas (nome_turma, turno, projeto, id_educador) values (?,?,?,?)';
+//     let SQL = 'insert into Turmas (nome_turma, turno, projeto, id_educador) values (?,?,?,?)';
  
-    // Executando a consulta com parâmetros seguros
-    db.query(SQL, [nome_turma, turno, projeto, id_educador], (err, result) => {
+//     // Executando a consulta com parâmetros seguros
+//     db.query(SQL, [nome_turma, turno, projeto, id_educador], (err, result) => {
         
-        if (err) {
-            console.log(err);
-            res.status(500).send("Erro ao consultar banco de dados");
-        } else {
+//         if (err) {
+//             console.log(err);
+//             res.status(500).send("Erro ao consultar banco de dados");
+//         } else {
+           
+//             res.send(result);
+//             // propriedade do objeto retornado pelo post
+
             
-            res.send(result);
             
-        }
+//         }
+//     });
+// });
+
+const inserirTurma = (nome_turma, turno, projeto, id_educador) => {
+    return new Promise((resolve, reject) => {
+        let SQL = 'INSERT INTO Turmas (nome_turma, turno, projeto, id_educador) VALUES (?, ?, ?, ?)';
+        db.query(SQL, [nome_turma, turno, projeto, id_educador], (err, result) => {
+            if (err) {
+                reject("Erro ao inserir turma");
+            } else {
+                resolve(result.insertId);
+            }
+        });
     });
+};
+
+const inserirAlunos = (listaAlunos, id_turma) => {
+    let SQLAlunos = 'INSERT INTO Alunos (nome_aluno, idade, telefone, id_turma) VALUES (?, ?, ?, ?)';
+    
+    // Criar uma lista de Promises para as inserções dos alunos
+    let promises = listaAlunos.map(aluno => {
+        return new Promise((resolve, reject) => {
+            db.query(SQLAlunos, [aluno.nome_aluno, aluno.idade, aluno.telefone, id_turma], (err, result) => {
+                if (err) {
+                    reject("Erro ao inserir aluno");
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+    });
+
+    // Retorna a Promise que resolve quando todas as Promises de inserção de alunos forem concluídas
+    
+    return Promise.all(promises);
+};
+
+
+app.post("/inserirTurma", (req, res) => {    
+    let { nome_turma, projeto, turno, id_educador, listaAlunos } = req.body;
+
+    inserirTurma(nome_turma, turno, projeto, id_educador)
+        .then(id_turma => {
+            // Inserir alunos após a turma ser inserida
+            return inserirAlunos(listaAlunos, id_turma);
+        })
+        .then(() => {
+            // Enviar a resposta quando todos os alunos forem inseridos
+            res.send("Turma e alunos inseridos com sucesso");
+        })
+        .catch(error => {
+            // Tratar erros
+            console.error(error);
+            res.status(500).send(error);
+        });
 });
+
+
+
+
+
 
 
 app.get("/getTurmas", (req, res) =>{

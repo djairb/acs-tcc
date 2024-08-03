@@ -90,40 +90,23 @@ const TelaCadastrarTurma = () => {
             alert("Sem alunos cadastrados")
             return; //retornar depois de verificar que a lista local ta vazia
         }
-
-        console.log("-----")
-
-        console.log(data);
-        console.log(listaAlunos);
-
-
-
-
-        // try {
-        //   const response = await Axios.post("http://localhost:3001/getUserLogin", {
-        //     usuario: data.usuario,
-        //     senha: data.senha,
-        //     tipoUsuario: data.tipoUsuario
-        //   });
-
-        //   if ((response.data.length)>0) {
-        //     toggleUser(response.data[0]);
-        //     setLoginError(false);
-        //     console.log(user);
-        //     {data.tipoUsuario==="educador" ? navigate('/home-educador') : alert("Tela Coord ainda não existe")}
-
-
-
-        //     // data ta sendo lido depois que response retorna positivo. então data existe no banco.
-        //     // navigate('/pagina-crud', { state: response.data.usuario }); // Exemplo de passagem de dados para a próxima página
-        //   } else {
-        //     // Login falhou, exibir mensagem de erro
-        //     setLoginError(true); // Ativa o estado de erro
-        //   }
-        // } catch (error) {
-        //   console.error('Erro ao tentar fazer login:', error);
-        //   alert("Ocorreu um erro ao tentar fazer login. Por favor, tente novamente mais tarde.");
-        // }
+        
+        
+        try {
+            await Axios.post("http://localhost:3001/inserirTurma", {
+            nome_turma: data.nome_turma,
+            projeto: data.projeto,
+            turno: data.turno,
+            id_educador: user.id_educador,
+            listaAlunos: listaAlunos
+            });         
+            
+            
+        } catch (error) {
+            console.error('Erro ao tentar fazer login:', error);
+            alert("Ocorreu um erro ao tentar inserir as turmas. Por favor, tente novamente mais tarde.");
+        }
+        
     };
 
     const location = useLocation();
