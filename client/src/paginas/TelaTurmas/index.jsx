@@ -33,14 +33,6 @@ const TelaTurmas = () => {
     
     const [turmas, setTurmas] = useState([]);
 
-    const [objetoTurma, setObjetoTurma] = useState({
-
-        isCadastrada: false, //variavel pra saber se esse objeto é de uma turma cadastrada
-        id_turma: null       
-
-
-    });
-
     const [count, setCount] = useState(0);
 
     const [loading, setLoading] = useState(false);
@@ -79,7 +71,7 @@ const TelaTurmas = () => {
         carregarTurmas();
         //
         
-      }, [count]);
+      }, [count, user.id_educador]);
 
 
     const botaoNavegarPaginaTurma = () =>{      
@@ -122,7 +114,9 @@ const TelaTurmas = () => {
                         nome_turma={turma.nome_turma}
                         projeto={turma.projeto}
                         turno={turma.turno}
-                        id_educador={turma.id_educador}                    
+                        id_educador={turma.id_educador}
+                        
+                                            
                     
                     />
      
@@ -137,7 +131,7 @@ const TelaTurmas = () => {
 
                 <button className='botaoInputs' onClick={navegarBotaoVoltar}>Voltar</button>
 
-                <button className='botaoInputs' onClick={botaoNavegarPaginaTurma}>Inserir  Turma</button>
+                <button className='botaoInputs' onClick={botaoNavegarPaginaTurma}>Inserir Turma</button>
 
 
             </div>

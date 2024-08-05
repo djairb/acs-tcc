@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import Axios from "axios";
 
 
+
 import CardEditarAluno from '../../componentes/CardEditarAluno/CardEditarAluno';
 import DialogEditarAlunoBanco from '../../componentes/dialogEditarAlunoBanco/DialogEditarAlunoBanco';
 import DialogInserirAlunoBanco from '../../componentes/dialogInserirAlunoBanco/dialogInserirAlunoBanco';
@@ -35,15 +36,14 @@ const TelaEditarTurma = () => {
 
     const [listaAlunos, setListaAlunos] = useState([]);
 
+
     useEffect(() => {
         // Código que deve ser executado quando `count` mudar
 
         // nao use useEffect pra renderizar componente.
         //usa ele aqui pra atualizar a lista que recebe a requisição - quando um componente é adicionado
-        const carregarAlunos = async () => {
+        const carregarAlunos = async () => {          
             
-            
-
             try {
                 
                 const response = await Axios.get('http://localhost:3001/getAllAlunosByIdTurma', {
@@ -79,6 +79,25 @@ const TelaEditarTurma = () => {
         setOpenDialog(true);
     }
 
+    const deletarTurma = () => {
+
+        if (listaAlunos.length !== 0) {
+            alert("Remova todos os alunos cadastrados")
+            return; //retornar depois de verificar que a lista local ta vazia
+        }
+
+        Axios.delete(`http://localhost:3001/deleteTurmaById/${objetoTurma.id_turma}`);
+
+        
+
+        navigate('/tela-turmas')
+
+
+       
+
+    }
+
+
     const navegarBotaoCadastrarTurma = () => {
 
         navigate('/home-educador');
@@ -94,12 +113,12 @@ const TelaEditarTurma = () => {
     const onSubmit = async (data) => {
 
         if (listaAlunos.length === 0) {
-            alert("Sem alunos cadastrados")
+            alert("Turma deve ter alunos")
             return; //retornar depois de verificar que a lista local ta vazia
         }
         
         
-        try {
+        try { //EDITAAAAAAR
             await Axios.post("http://localhost:3001/inserirTurma", {
             nome_turma: data.nome_turma,
             projeto: data.projeto,
@@ -123,7 +142,7 @@ const TelaEditarTurma = () => {
     //turma que vem da lista, com todos os campos do banco. pra preencher os dados e editar ou deletar pelos botoes  
 
     return (
-        <main className='mainPage'>
+        <main className='mainPage'>           
 
             <DialogInserirAlunoBanco
 
@@ -206,11 +225,8 @@ const TelaEditarTurma = () => {
                             idade={aluno.idade}
                             telefone={aluno.telefone}
                             setCount={setCount}
-                            count={count}
+                            count={count}                         
                             
-                            
-                        
-                        
                         />
 
 
@@ -227,6 +243,12 @@ const TelaEditarTurma = () => {
                 <button className='botaoInputs' onClick={inserirAluno}>Inserir Aluno</button>
 
                 <button className='botaoInputs' onClick={() => handleSubmit(onSubmit)()}>Salvar Edições</button>
+
+                <button className='botaoInputs botaoExcluir' onClick={deletarTurma}>Deletar Turma</button>
+
+               
+
+                
 
 
             </div>

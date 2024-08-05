@@ -106,6 +106,25 @@ app.delete("/deleteAlunoById/:id", (req, res) => {
 
 });
 
+app.delete("/deleteTurmaById/:id", (req, res) => {
+
+    const {id} = req.params;
+
+    console.log(id);
+
+    let SQL  = "delete from turmas where id_turma = ?";
+    db.query(SQL, [id], (err, result) =>{
+
+        if(err) console.log(err);
+        else res.send(result);
+
+    });
+
+
+
+});
+
+
 // app.get("/getUser", (req, res) =>{
 
 //     let usuario = req.query.usuario ?? '';

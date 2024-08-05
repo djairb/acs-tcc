@@ -54,9 +54,7 @@ export default function DialogEditarAlunoBanco(props) {
     const deletarAlunoById = () => {
 
         Axios.delete(`http://localhost:3001/deleteAlunoById/${props.id_aluno}`);
-        handleClose2();
-
-        
+        handleClose2();      
 
 
 

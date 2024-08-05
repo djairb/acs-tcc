@@ -179,6 +179,9 @@
 }
 
 
+
+
+
 .mainHome .nomeBotoesDiv button:hover, .mainPage .botaoInputs:hover, .botoesDialog button:hover{
 
   background-color: white;
@@ -207,7 +210,7 @@
   
 }
 
-.botoesDialog .botaoExcluir{
+.botoesDialog .botaoExcluir, .divBotoesInputs .botaoExcluir{
   background-color: #c52233;
 }
 
