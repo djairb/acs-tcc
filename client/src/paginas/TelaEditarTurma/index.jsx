@@ -32,7 +32,6 @@ const TelaEditarTurma = () => {
 
     const objetoTurma = location.state;
     
-    console.log(objetoTurma)
 
     const [count, setCount] = useState(0);
 
@@ -122,15 +121,17 @@ const TelaEditarTurma = () => {
             alert("Turma deve ter alunos")
             return; //retornar depois de verificar que a lista local ta vazia
         }
+
+        console.log(data)
         
         
         try { //EDITAAAAAAR
-            await Axios.post("http://localhost:3001/inserirTurma", {
+            await Axios.put("http://localhost:3001/editarTurmaById", {
             nome_turma: data.nome_turma,
             projeto: data.projeto,
             turno: data.turno,
-            id_educador: user.id_educador,
-            listaAlunos: listaAlunos
+            id_turma: objetoTurma.id_turma
+            
             });
             
             navigate('/tela-turmas')
@@ -143,10 +144,6 @@ const TelaEditarTurma = () => {
         
     };
 
-    
-
-    //turma que vem da lista, com todos os campos do banco. pra preencher os dados e editar ou deletar pelos botoes  
-
     return (
         <main className='mainPage'>           
 
@@ -155,8 +152,6 @@ const TelaEditarTurma = () => {
                 open={openDialog}
 
                 setOpenDialog={setOpenDialog}
-
-                turma_id={objetoTurma.id_turma}
 
                 setCount={setCount}
                 
@@ -204,7 +199,6 @@ const TelaEditarTurma = () => {
 
                 <select
 
-
                     className={errors.turno && "input-error"}
                     defaultValue={objetoTurma.turno}
                     {...register("turno", { validate: (value) => value !== "0" })}
@@ -236,7 +230,6 @@ const TelaEditarTurma = () => {
                         />
 
 
-
                     ))
                 }
 
@@ -252,13 +245,8 @@ const TelaEditarTurma = () => {
 
                 <button className='botaoInputs botaoExcluir' onClick={deletarTurma}>Deletar Turma</button>
 
-               
-
-                
-
-
+            
             </div>
-
 
 
         </main>

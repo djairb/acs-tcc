@@ -72,8 +72,7 @@ export default function CardEditarAluno(props) {
                     <p>Telefone: {props.telefone}</p>                    
                     
                 </div>
-
-                {console.log(aberto)}                
+              
 
                
 

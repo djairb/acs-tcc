@@ -27,8 +27,6 @@ const TelaTurmas = () => {
         navigate('/home-educador');
     }
 
-    const [openDialog, setOpenDialog] = useState(false);
-
     const [turmas, setTurmas] = useState([]);
 
     const [count, setCount] = useState(0);
@@ -79,23 +77,9 @@ const TelaTurmas = () => {
         
     }
 
-
-    const ativarEffect = () =>{
-        setCount(count + 1);
-    }
-
     return (
         <main className='mainPage'>        
 
-            {/* <DialogInserirTurma
-
-                open={openDialog}
-                setOpenDialog={setOpenDialog}
-                id_educador = {user.id_educador}
-                
-                ativarEffect = {ativarEffect}
-
-            /> */}
 
             <h1 className='titlePage'>Turmas Cadastradas</h1>
 

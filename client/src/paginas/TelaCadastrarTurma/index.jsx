@@ -109,11 +109,7 @@ const TelaCadastrarTurma = () => {
             alert("Ocorreu um erro ao tentar inserir as turmas. Por favor, tente novamente mais tarde.");
         }
         
-    };
-
-    const location = useLocation();
-
-    //turma que vem da lista, com todos os campos do banco. pra preencher os dados e editar ou deletar pelos botoes  
+    }; 
 
     return (
         <main className='mainPage'>

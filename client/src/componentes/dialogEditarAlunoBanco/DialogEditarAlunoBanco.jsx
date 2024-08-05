@@ -43,11 +43,8 @@ export default function DialogEditarAlunoBanco(props) {
 
     const handleClose2 = () => {
         
-        props.setNumero(props.numero + 1);
-        
+        props.setNumero(props.numero + 1);     
           
-        
-               
         
     };
 
@@ -67,10 +64,6 @@ export default function DialogEditarAlunoBanco(props) {
             console.error('Erro ao excluir aluno:', error);
             alert("Ocorreu um erro ao tentar excluir o aluno. Por favor, tente novamente.");
           }
-
-             
-
-
 
     }
 

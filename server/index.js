@@ -125,48 +125,6 @@ app.delete("/deleteTurmaById/:id", (req, res) => {
 });
 
 
-// app.get("/getUser", (req, res) =>{
-
-//     let usuario = req.query.usuario ?? '';
-//     let senha = req.query.senha ?? '';
-
-//     let SQL= "SELECT * FROM usuarios WHERE usuario = ? and senha = ?";
-
-//     db.query(SQL, [usuario, senha], (err, result) =>{
-
-//         if (err) console.log(err);
-//         else res.send(result);
-//         //envia o numero da lista da chamada
-//     })
-
-// });
-
-
-
-// app.get("/getUser", (req, res) => {
-
-//     let usuario = req.query.usuario ?? '';
-//     let senha = req.query.senha ?? '';
-
-// //     Ao chamar db.query(SQL, [usuario, senha], ...), o array [usuario, senha] contém os valores que serão substituídos nos placeholders ? na consulta SQL.
-// // O banco de dados tratará esses valores como dados, não como parte do comando SQL, o que elimina a possibilidade de um ataque de injeção SQL. Isso ocorre porque os parâmetros são tratados como dados literalmente e não como parte da estrutura do SQL.
-    
-
-//     // Consulta SQL parametrizada
-//     let SQL = "SELECT * FROM usuarios WHERE usuario = ? and senha = ?";
-    
-//     // Executando a consulta com parâmetros seguros
-//     db.query(SQL, [usuario, senha], (err, result) => {
-        
-//         if (err) {
-//             console.log(err);
-//             res.status(500).send("Erro ao consultar banco de dados");
-//         } else {
-            
-//             res.send(result);
-//         }
-//     });
-// });
 
 app.post("/getUserLogin", (req, res) => {    
 
@@ -219,6 +177,7 @@ app.post("/getUserLogin", (req, res) => {
 //         }
 //     });
 // });
+
 
 const inserirTurma = (nome_turma, turno, projeto, id_educador) => {
     return new Promise((resolve, reject) => {
@@ -301,6 +260,35 @@ app.put("/editarAlunoById", (req, res) =>{
 })
 
 
+app.put("/editarTurmaById", (req, res) =>{
+
+    let { nome_turma, projeto, turno, id_turma } = req.body;
+
+    console.log(req.body);
+
+   
+    let SQL = "UPDATE Turmas SET nome_turma = ?, projeto = ?, turno = ? WHERE id_turma = ?";
+
+    db.query(SQL, [nome_turma, projeto, turno, id_turma], (err, result) =>{
+
+        if (err) {
+            console.log(err);
+            res.status(500).send("Erro ao consultar banco de dados");
+        } else {
+            
+            res.send(result);
+            
+        }
+
+
+    })
+
+
+
+})
+
+
+
 app.post("/inserirAlunoByIdTurma", (req, res) => {    
 
     let { nome_aluno, idade, telefone, id_turma } = req.body;
@@ -320,6 +308,7 @@ app.post("/inserirAlunoByIdTurma", (req, res) => {
         }
     });
 });
+
 
 
 
