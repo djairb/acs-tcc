@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import Axios from "axios";
 import DialogInserirAlunoArray from '../../componentes/dialogInserirAlunoArray/DialogInserirAlunoArray';
 import CardAluno from '../../componentes/CardAluno/CardAluno';
+import CardEditarAluno from '../../componentes/CardEditarAluno/CardEditarAluno';
 
 const TelaEditarTurma = () => {
 
@@ -30,6 +31,42 @@ const TelaEditarTurma = () => {
 
     const [localIndex, setLocalIndex] = useState(1);
 
+    const [count, setCount] = useState(0);
+
+    const [listaAlunos, setListaAlunos] = useState([]);
+
+    useEffect(() => {
+        // Código que deve ser executado quando `count` mudar
+
+        // nao use useEffect pra renderizar componente.
+        //usa ele aqui pra atualizar a lista que recebe a requisição - quando um componente é adicionado
+        const carregarAlunos = async () => {
+            
+            
+
+            try {
+                
+                const response = await Axios.get('http://localhost:3001/getAllAlunosByIdTurma', {
+                    params: {
+                        id: objetoTurma.id_turma
+                    }
+                });
+                setListaAlunos(response.data);
+              
+        
+            } catch (error) {
+              console.error('Erro ao tentar fazer login:', error);
+              alert("Ocorreu um erro ao tentar fazer login. Por favor, tente novamente mais tarde.");
+              
+            }
+        };
+
+        carregarAlunos();
+        //
+        
+    }, [count]);
+
+
     const navigate = useNavigate();
 
     const navegarBotaoVoltar = () => {
@@ -47,9 +84,9 @@ const TelaEditarTurma = () => {
         navigate('/home-educador');
     }
 
-    const { register, handleSubmit, formState: { errors, setError } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const [listaAlunos, setListaAlunos] = useState([]);
+    
 
     const [openDialog, setOpenDialog] = useState(false);
 
@@ -193,15 +230,16 @@ const TelaEditarTurma = () => {
 
                     listaAlunos.map(aluno => (                        
 
-                        <CardAluno
+                        <CardEditarAluno
 
-                            key={aluno.id}
-                            id={aluno.id}
+                            key={aluno.id_aluno}
+                            id_aluno={aluno.id_aluno}
                             nome_aluno={aluno.nome_aluno}
                             idade={aluno.idade}
                             telefone={aluno.telefone}
-                            editarAlunos={editarAlunos}
-                            deletarAluno={deletarAluno}
+                            setCount={setCount}
+                            count={count}
+                            
                             
                         
                         

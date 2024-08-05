@@ -236,6 +236,32 @@ app.post("/inserirTurma", (req, res) => {
 });
 
 
+app.put("/editarAlunoById", (req, res) =>{
+
+    let { nome_aluno, idade, telefone, id_aluno } = req.body;
+
+ 
+    let SQL = "UPDATE alunos SET nome_aluno = ?, idade = ?, telefone = ? WHERE id_aluno = ?";
+
+    db.query(SQL, [nome_aluno, idade, telefone, id_aluno], (err, result) =>{
+
+        if (err) {
+            console.log(err);
+            res.status(500).send("Erro ao consultar banco de dados");
+        } else {
+            
+            res.send(result);
+            
+        }
+
+
+    })
+
+
+
+})
+
+
 
 
 
@@ -267,6 +293,28 @@ app.get("/getAllTurmasByIdEducador", (req, res) =>{
 
 
     let SQL= "SELECT * FROM turmas WHERE id_educador = ?";
+
+    db.query(SQL, [id], (err, result) => {
+
+        if (err) {
+            console.log(err);
+            res.status(500).send("Erro ao consultar banco de dados");
+        } else {
+            
+            res.send(result);
+            
+        }
+    });
+
+});
+
+
+app.get("/getAllAlunosByIdTurma", (req, res) =>{
+
+    const { id } = req.query;
+
+
+    let SQL= "SELECT * FROM alunos WHERE id_turma = ?";
 
     db.query(SQL, [id], (err, result) => {
 
