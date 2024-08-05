@@ -30,6 +30,7 @@ const TelaCadastrarAula = () => {
         const carregarTurmas = async () => {
 
             try {
+                
 
                 const response = await Axios.get('http://localhost:3001/getAllTurmasByIdEducador', {
                     params: { id: user.id_educador }
