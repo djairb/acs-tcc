@@ -51,10 +51,24 @@ export default function DialogEditarAlunoBanco(props) {
         
     };
 
-    const deletarAlunoById = () => {
+    const deletarAlunoById = async () => {
 
-        Axios.delete(`http://localhost:3001/deleteAlunoById/${props.id_aluno}`);
-        handleClose2();      
+        try {
+            // Realiza a requisição de exclusão
+            await Axios.delete(`http://localhost:3001/deleteAlunoById/${props.id_aluno}`);
+
+
+            handleClose2(); 
+        
+            // Se a exclusão for bem-sucedida, navegue para a tela de turmas
+        
+          } catch (error) {
+            // Trata possíveis erros da requisição
+            console.error('Erro ao excluir aluno:', error);
+            alert("Ocorreu um erro ao tentar excluir o aluno. Por favor, tente novamente.");
+          }
+
+             
 
 
 

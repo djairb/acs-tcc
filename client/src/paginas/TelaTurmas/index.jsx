@@ -29,8 +29,6 @@ const TelaTurmas = () => {
 
     const [openDialog, setOpenDialog] = useState(false);
 
-    const [semTurma, setSemTurma] = useState(false);
-    
     const [turmas, setTurmas] = useState([]);
 
     const [count, setCount] = useState(0);
@@ -56,7 +54,7 @@ const TelaTurmas = () => {
                     }
                 });
                 setTurmas(response.data);
-                setSemTurma(response.data.length === 0);
+                
                 setLoading(false);
                 console.log(response);
               
@@ -71,7 +69,7 @@ const TelaTurmas = () => {
         carregarTurmas();
         //
         
-      }, [count, user.id_educador]);
+      }, [count]);
 
 
     const botaoNavegarPaginaTurma = () =>{      
@@ -103,7 +101,7 @@ const TelaTurmas = () => {
 
             <div className='divInputsMain'>
                 {loading && <div className="spinner"></div>}
-                {semTurma && <p>não há turmas cadastradas</p>}
+                {turmas.length===0 && <p>não há turmas cadastradas</p>}
 
                 {turmas.length>0 && turmas.map(turma => (
 
@@ -114,18 +112,14 @@ const TelaTurmas = () => {
                         nome_turma={turma.nome_turma}
                         projeto={turma.projeto}
                         turno={turma.turno}
-                        id_educador={turma.id_educador}
-                        
-                                            
+                        id_educador={turma.id_educador}                                             
                     
                     />
      
                 ))}
 
                 
-            </div>
-
-            
+            </div>            
 
             <div className='divBotoesInputs'>
 

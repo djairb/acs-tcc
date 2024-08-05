@@ -16,6 +16,8 @@ import DialogInserirAlunoBanco from '../../componentes/dialogInserirAlunoBanco/d
 
 const TelaEditarTurma = () => {
 
+    const navigate = useNavigate();
+
     const { user } = useContext(UserContext);
 
     useEffect(() => {
@@ -67,7 +69,7 @@ const TelaEditarTurma = () => {
     }, [count]);
 
 
-    const navigate = useNavigate();
+    
 
     const navegarBotaoVoltar = () => {
 
@@ -79,23 +81,27 @@ const TelaEditarTurma = () => {
         setOpenDialog(true);
     }
 
-    const deletarTurma = () => {
-
+    const deletarTurma = async () => {
+        // Certifique-se de ter acesso ao hook useNavigate
+      
         if (listaAlunos.length !== 0) {
-            alert("Remova todos os alunos cadastrados")
-            return; //retornar depois de verificar que a lista local ta vazia
+          alert("Remova todos os alunos cadastrados");
+          return;
         }
-
-        Axios.delete(`http://localhost:3001/deleteTurmaById/${objetoTurma.id_turma}`);
-
-        
-
-        navigate('/tela-turmas')
-
-
-       
-
-    }
+      
+        try {
+          // Realiza a requisição de exclusão
+          await Axios.delete(`http://localhost:3001/deleteTurmaById/${objetoTurma.id_turma}`);
+      
+          // Se a exclusão for bem-sucedida, navegue para a tela de turmas
+          navigate('/tela-turmas', { replace: true });
+      
+        } catch (error) {
+          // Trata possíveis erros da requisição
+          console.error('Erro ao excluir turma:', error);
+          alert("Ocorreu um erro ao tentar excluir a turma. Por favor, tente novamente.");
+        }
+      };
 
 
     const navegarBotaoCadastrarTurma = () => {
