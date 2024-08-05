@@ -86,6 +86,26 @@ app.delete("/delete/:id", (req, res) => {
 
 });
 
+
+
+
+app.delete("/deleteAlunoById/:id", (req, res) => {
+
+    const {id} = req.params;
+
+    let SQL  = "delete from alunos where id_aluno = ?";
+    db.query(SQL, [id], (err, result) =>{
+
+        if(err) console.log(err);
+        else res.send(result);
+
+
+    });
+
+
+
+});
+
 // app.get("/getUser", (req, res) =>{
 
 //     let usuario = req.query.usuario ?? '';

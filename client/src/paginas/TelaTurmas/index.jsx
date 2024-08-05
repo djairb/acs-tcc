@@ -8,8 +8,6 @@ import DialogInserirTurma from '../../componentes/dialogInserirTurma/dialogInser
 import Axios from 'axios';
 import CardTurma from '../../componentes/CardTurma/CardTurma';
 
-
-
 const TelaTurmas = () => {
 
     const navigate = useNavigate();
@@ -84,11 +82,8 @@ const TelaTurmas = () => {
       }, [count]);
 
 
-    const botaoNavegarPaginaTurma = () =>{
-
-        
+    const botaoNavegarPaginaTurma = () =>{      
     
-        
         // setOpenDialog(true);
         navigate('/tela-cadastrar-turma');
         
@@ -99,8 +94,6 @@ const TelaTurmas = () => {
         setCount(count + 1);
     }
 
-   
-  
     return (
         <main className='mainPage'>        
 
