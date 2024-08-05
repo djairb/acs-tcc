@@ -129,8 +129,7 @@ const TelaTurmas = () => {
                         nome_turma={turma.nome_turma}
                         projeto={turma.projeto}
                         turno={turma.turno}
-                        id_educador={turma.id_educador} 
-                    
+                        id_educador={turma.id_educador}                    
                     
                     />
      

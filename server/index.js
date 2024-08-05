@@ -262,6 +262,28 @@ app.put("/editarAlunoById", (req, res) =>{
 })
 
 
+app.post("/inserirAlunoByIdTurma", (req, res) => {    
+
+    let { nome_aluno, idade, telefone, id_turma } = req.body;
+
+    let SQL = 'INSERT INTO Alunos (nome_aluno, idade, telefone, id_turma) VALUES (?, ?, ?, ?)';
+   
+    // Executando a consulta com parâmetros seguros
+    db.query(SQL, [nome_aluno, idade, telefone, id_turma], (err, result) => {
+        
+        if (err) {
+            console.log(err);
+            res.status(500).send("Erro ao consultar banco de dados");
+        } else {
+            
+            res.send(result);
+            
+        }
+    });
+});
+
+
+
 
 
 

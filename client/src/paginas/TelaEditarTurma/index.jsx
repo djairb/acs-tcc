@@ -7,9 +7,11 @@ import { UserContext } from '../../context/UserContext';
 import { useForm } from 'react-hook-form';
 
 import Axios from "axios";
-import DialogInserirAlunoArray from '../../componentes/dialogInserirAlunoArray/DialogInserirAlunoArray';
-import CardAluno from '../../componentes/CardAluno/CardAluno';
+
+
 import CardEditarAluno from '../../componentes/CardEditarAluno/CardEditarAluno';
+import DialogEditarAlunoBanco from '../../componentes/dialogEditarAlunoBanco/DialogEditarAlunoBanco';
+import DialogInserirAlunoBanco from '../../componentes/dialogInserirAlunoBanco/dialogInserirAlunoBanco';
 
 const TelaEditarTurma = () => {
 
@@ -28,8 +30,6 @@ const TelaEditarTurma = () => {
     const objetoTurma = location.state;
     
     console.log(objetoTurma)
-
-    const [localIndex, setLocalIndex] = useState(1);
 
     const [count, setCount] = useState(0);
 
@@ -88,41 +88,7 @@ const TelaEditarTurma = () => {
 
     
 
-    const [openDialog, setOpenDialog] = useState(false);
-
-    const adicionarAluno = (novoAluno) => {
-        setListaAlunos((prevAlunos) => [...prevAlunos, novoAluno]);
-    };
-
-    const editarAlunos = (id, novosDados) => {
-        setListaAlunos(prevLista => {
-            const index = prevLista.findIndex(item => item.id === id);
-            if (index !== -1) {
-                // Cria uma nova lista com o aluno atualizado
-                const novaLista = [...prevLista];
-                novaLista[index] = { ...novaLista[index], ...novosDados };
-                return novaLista;
-            } else {
-                console.log('Objeto com o ID fornecido não encontrado.');
-                return prevLista; // Retorna a lista original se o ID não for encontrado
-            }
-        });
-    };
-
-    const deletarAluno = (id) => {
-        setListaAlunos(prevLista => {
-            // Filtra a lista para remover o aluno com o ID fornecido
-            const novaLista = prevLista.filter(item => item.id !== id);
-            
-            if (novaLista.length === prevLista.length) {
-                // Verifica se algum aluno foi removido
-                console.log('Objeto com o ID fornecido não encontrado.');
-            }
-    
-            return novaLista;
-        });
-    };
-    
+    const [openDialog, setOpenDialog] = useState(false);  
 
 
     const onSubmit = async (data) => {
@@ -159,17 +125,19 @@ const TelaEditarTurma = () => {
     return (
         <main className='mainPage'>
 
-            <DialogInserirAlunoArray
+            <DialogInserirAlunoBanco
 
                 open={openDialog}
 
                 setOpenDialog={setOpenDialog}
 
-                localIndex={localIndex}
+                turma_id={objetoTurma.id_turma}
 
-                setLocalIndex={setLocalIndex}
+                setCount={setCount}
+                
+                count={count}
 
-                adicionarAluno={adicionarAluno}
+                id_turma={objetoTurma.id_turma}
 
             />
 
@@ -258,7 +226,7 @@ const TelaEditarTurma = () => {
 
                 <button className='botaoInputs' onClick={inserirAluno}>Inserir Aluno</button>
 
-                <button className='botaoInputs' onClick={() => handleSubmit(onSubmit)()}>Cadastrar Turma</button>
+                <button className='botaoInputs' onClick={() => handleSubmit(onSubmit)()}>Salvar Edições</button>
 
 
             </div>
