@@ -107,12 +107,6 @@ const TelaCadastrarAula = () => {
                 />
                 {errors.data_aula && <p className="error-message">Data da aula é obrigatória</p>}
 
-
-
-
-
-
-
                 <label>Selecionar Turma:</label>
 
                 <select
@@ -122,7 +116,6 @@ const TelaCadastrarAula = () => {
                     {...register("id_turma", { validate: (value) => value !== "0" })}
                 >
                     <option value="0">Selecionar Projeto</option>
-
 
                     {turmas.length === 0 ? (
                         <option value="" disabled>Não há turmas cadastradas</option>
@@ -135,6 +128,17 @@ const TelaCadastrarAula = () => {
                     )}
                 </select>
                 {errors?.id_turma?.type === "validate" && (<p className="error-message">Selecione uma Turma</p>)}
+
+                <label>Descrição:</label>
+
+                <textarea
+                    placeholder='Adicionar descrição da aula'
+                    className={errors.descricao ? "inputDescricao input-error" : "inputDescricao"}
+                    {...register('descricao', { required: true })}
+                    rows="5"  // Ajuste o número de linhas conforme necessário
+                    cols="50"  // Ajuste a largura conforme necessário
+                />
+                {errors.descricao && <p className="error-message">Descrição é obrigatória</p>}
 
 
 
