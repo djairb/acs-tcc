@@ -90,7 +90,7 @@ const TelaTurmas = () => {
     
         
         // setOpenDialog(true);
-        navigate('/tela-cadastrar-turma', { state: objetoTurma });
+        navigate('/tela-cadastrar-turma');
         
     }
 

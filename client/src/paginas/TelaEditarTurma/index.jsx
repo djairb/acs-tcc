@@ -10,13 +10,9 @@ import Axios from "axios";
 import DialogInserirAlunoArray from '../../componentes/dialogInserirAlunoArray/DialogInserirAlunoArray';
 import CardAluno from '../../componentes/CardAluno/CardAluno';
 
-const TelaCadastrarTurma = () => {
+const TelaEditarTurma = () => {
 
     const { user } = useContext(UserContext);
-
-    const [localIndex, setLocalIndex] = useState(1);
-
-    ///local index vai ser adicionado ao array local (que é usado antes de subir pro banco), assim, editar e remover podem ser feitos usando esse index.
 
     useEffect(() => {
 
@@ -25,6 +21,14 @@ const TelaCadastrarTurma = () => {
         }
 
     }, [user]);
+
+    const location = useLocation();
+
+    const objetoTurma = location.state;
+    
+    console.log(objetoTurma)
+
+    const [localIndex, setLocalIndex] = useState(1);
 
     const navigate = useNavigate();
 
@@ -111,7 +115,7 @@ const TelaCadastrarTurma = () => {
         
     };
 
-    const location = useLocation();
+    
 
     //turma que vem da lista, com todos os campos do banco. pra preencher os dados e editar ou deletar pelos botoes  
 
@@ -132,7 +136,7 @@ const TelaCadastrarTurma = () => {
 
             />
 
-            <h1 className='titlePage'>Cadastrar Turma</h1>
+            <h1 className='titlePage'>Editar Turma</h1>
 
             <div className='divInputsMain'>
 
@@ -142,6 +146,7 @@ const TelaCadastrarTurma = () => {
                 <input
                     type='text'
                     placeholder='Nome da turma'
+                    defaultValue={objetoTurma.nome_turma}
                     className={errors.nome_turma && "input-error"}
                     {...register('nome_turma', { required: true })}
                 />
@@ -152,7 +157,7 @@ const TelaCadastrarTurma = () => {
                 <select
 
                     className={errors.projeto && "input-error"}
-                    defaultValue="0"
+                    defaultValue={objetoTurma.projeto}
                     {...register("projeto", { validate: (value) => value !== "0" })}
                 >
                     <option value="0">Selecionar Projeto</option>
@@ -171,7 +176,7 @@ const TelaCadastrarTurma = () => {
 
 
                     className={errors.turno && "input-error"}
-                    defaultValue="0"
+                    defaultValue={objetoTurma.turno}
                     {...register("turno", { validate: (value) => value !== "0" })}
                 >
                     <option value="0">Selecionar Turno</option>
@@ -227,4 +232,4 @@ const TelaCadastrarTurma = () => {
     );
 };
 
-export default TelaCadastrarTurma;
+export default TelaEditarTurma;

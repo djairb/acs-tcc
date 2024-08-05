@@ -8,8 +8,9 @@ import TelaLogin from "../paginas/TelaLogin";
 import TelaHomeEducador from "../paginas/TelaHomeEducador";
 import TelaTurmas from "../paginas/TelaTurmas";
 
-import TelaDetalheTurma from "../paginas/TelaDetalheTurma";
+
 import TelaCadastrarTurma from "../paginas/TelaCadastrarTurma";
+import TelaEditarTurma from "../paginas/TelaEditarTurma";
 
 const Rotas = () => (
   <HashRouter>
@@ -22,7 +23,7 @@ const Rotas = () => (
         <Route exact path='/home-educador'   element={<TelaHomeEducador/>}/>
         <Route exact path='/login'   element={<TelaLogin/>}/>
         <Route exact path='/tela-turmas'   element={<TelaTurmas/>}/>
-        <Route exact path='/tela-detalhe-turma'   element={<TelaDetalheTurma/>}/>
+        <Route exact path='/tela-editar-turma'   element={<TelaEditarTurma/>}/>
         <Route exact path='/tela-cadastrar-turma'   element={<TelaCadastrarTurma/>}/>        
         
       </Routes>
