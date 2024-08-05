@@ -15,6 +15,11 @@ const TelaHomeEducador = () => {
         navigate('/tela-turmas');
     }
 
+    const navegarBotaoCadastraAula = () =>{
+
+        navigate('/tela-cadastrar-aula');
+    }
+
 
     useEffect(() => {
 
@@ -33,7 +38,8 @@ const TelaHomeEducador = () => {
                 <div className='divBotoesHome'>
 
                     <button onClick={navegarBotaoTurma}>Ver Turmas</button>
-                    <button>Alterar</button>
+                    <button onClick={navegarBotaoCadastraAula}>Registrar Aula</button>
+                    
                     <button>Alterar</button>               
                     
                 </div>
