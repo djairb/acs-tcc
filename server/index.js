@@ -358,6 +358,29 @@ app.get("/getAllTurmasByIdEducador", (req, res) =>{
 
 });
 
+app.get("/getAlunosByIdTurma", (req, res) =>{
+
+    const { id } = req.query;
+
+
+    let SQL= "SELECT * FROM alunos WHERE id_turma = ?";
+
+    db.query(SQL, [id], (err, result) => {
+
+        if (err) {
+            console.log(err);
+            res.status(500).send("Erro ao consultar banco de dados");
+        } else {
+            
+            res.send(result);
+            
+        }
+    });
+
+});
+
+
+
 
 app.get("/getAllAlunosByIdTurma", (req, res) =>{
 

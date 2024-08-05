@@ -14,9 +14,18 @@ const TelaCadastrarAula = () => {
 
     const navigate = useNavigate();
 
+    
+
     const { user } = useContext(UserContext);
 
     const [turmas, setTurmas] = useState([]);
+
+    const [turmaId, setTurmaId] = useState();
+
+    const [alunos, setAlunos] = useState([]);
+
+    const { register, formState: { errors }, handleSubmit, watch } = useForm();
+
 
     useEffect(() => {
 
@@ -30,7 +39,7 @@ const TelaCadastrarAula = () => {
         const carregarTurmas = async () => {
 
             try {
-                
+
 
                 const response = await Axios.get('http://localhost:3001/getAllTurmasByIdEducador', {
                     params: { id: user.id_educador }
@@ -49,23 +58,38 @@ const TelaCadastrarAula = () => {
         carregarTurmas();
     }, [user.id_educador]);
 
+    const selectedTurmaId = watch('id_turma');
+
+    useEffect(() => {
+        const carregarAlunos = async () => {
+
+            try {
 
 
+                const response = await Axios.get('http://localhost:3001/getAlunosByIdTurma', {
+                    params: { id: selectedTurmaId }
+                });
+                
+                setAlunos(response.data);
 
+            } catch (error) {
 
-    const { register, handleSubmit, formState: { errors, setError } } = useForm();
+                console.error('Erro ao carregar turmas:', error);
 
-    const [listaAlunos, setListaAlunos] = useState([]);
+                alert("Ocorreu um erro ao tentar carregar as turmas. Por favor, tente novamente mais tarde.");
+            }
+        };
+
+        carregarAlunos();
+    }, [selectedTurmaId]);
+    
+
 
     const [openDialog, setOpenDialog] = useState(false);
 
-
-
-
-
     const onSubmit = async (data) => {
 
-        if (listaAlunos.length === 0) {
+        if (alunos.length === 0) {
             alert("Sem alunos cadastrados")
             return; //retornar depois de verificar que a lista local ta vazia
         }
@@ -77,7 +101,7 @@ const TelaCadastrarAula = () => {
                 projeto: data.projeto,
                 turno: data.turno,
                 id_educador: user.id_educador,
-                listaAlunos: listaAlunos
+                alunos:alunos
             });
 
             navigate('/tela-turmas')
@@ -142,37 +166,26 @@ const TelaCadastrarAula = () => {
                 {errors.descricao && <p className="error-message">Descrição é obrigatória</p>}
 
 
+                <label>Frequência:</label>
+
+                {alunos.length === 0 ? <p>Selecionar Turma</p> :
+
+                    alunos.map(aluno => (
+
+                        <CardAluno
+
+                            key={aluno.id}
+                            id={aluno.id}
+                            nome_aluno={aluno.nome_aluno}
+                            idade={aluno.idade}
+                            telefone={aluno.telefone}
+                            
 
 
+                        />
 
-
-
-
-
-
-
-
-
-
-
-                <label>Turno:</label>
-
-                <select
-
-
-                    className={errors.turno && "input-error"}
-                    defaultValue="0"
-                    {...register("turno", { validate: (value) => value !== "0" })}
-                >
-                    <option value="0">Selecionar Turno</option>
-                    <option value="Manhã">Manhã</option>
-                    <option value="Tarde">Tarde</option>
-                    <option value="Noite">Noite</option>
-
-                </select>
-                {errors?.turno?.type === "validate" && (<p className="error-message">Selecione um Turno</p>)}
-
-                <label>Alunos</label>
+                    ))
+                }
 
 
 
