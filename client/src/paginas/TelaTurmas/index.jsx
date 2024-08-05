@@ -74,7 +74,7 @@ const TelaTurmas = () => {
 
     const botaoNavegarPaginaTurma = () =>{      
     
-        // setOpenDialog(true);
+        
         navigate('/tela-cadastrar-turma');
         
     }
@@ -87,15 +87,15 @@ const TelaTurmas = () => {
     return (
         <main className='mainPage'>        
 
-            <DialogInserirTurma
+            {/* <DialogInserirTurma
 
                 open={openDialog}
                 setOpenDialog={setOpenDialog}
                 id_educador = {user.id_educador}
-                // passar a função pra ativar o effect que faz a requisição de novo
+                
                 ativarEffect = {ativarEffect}
 
-            />
+            /> */}
 
             <h1 className='titlePage'>Turmas Cadastradas</h1>
 

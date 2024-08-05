@@ -196,13 +196,10 @@ const TelaCadastrarTurma = () => {
                             idade={aluno.idade}
                             telefone={aluno.telefone}
                             editarAlunos={editarAlunos}
-                            deletarAluno={deletarAluno}
-                            
+                            deletarAluno={deletarAluno}                          
                         
                         
                         />
-
-
 
                     ))
                 }
