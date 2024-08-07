@@ -34,7 +34,7 @@ const TelaHomeEducador = () => {
 
             <div className='nomeBotoesDiv'>
 
-                <h1>Olá, {user.nome}</h1>
+                <h1>Bem-vindo, {user.nome}!</h1>
                 <div className='divBotoesHome'>
 
                     <button onClick={navegarBotaoTurma}>Ver Turmas</button>
