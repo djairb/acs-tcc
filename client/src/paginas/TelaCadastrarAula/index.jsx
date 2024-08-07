@@ -84,9 +84,6 @@ const TelaCadastrarAula = () => {
     }, [selectedTurmaId]);
     
 
-
-    const [openDialog, setOpenDialog] = useState(false);
-
     const onSubmit = async (data) => {
 
         if (alunos.length === 0) {
