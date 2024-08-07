@@ -69,7 +69,7 @@ const TelaCadastrarAula = () => {
             a.id_aluno === id ? { ...a, presente: value } : a
         );
         setAlunos(updatedAlunos);
-        
+
     };
 
     const handleJustificativaChange = (id, value) => {
@@ -81,8 +81,13 @@ const TelaCadastrarAula = () => {
     };
 
     const onSubmit = async (data) => {
-        if (alunos.length === 0) {
-            alert("Sem alunos cadastrados");
+
+        const todasFaltasRegistradas = alunos.every(aluno => aluno.presente !== '');
+
+        console.log(todasFaltasRegistradas)
+
+        if (!todasFaltasRegistradas) {
+            alert("Ainda há alunos sem registro.");
             return;
         }
 
