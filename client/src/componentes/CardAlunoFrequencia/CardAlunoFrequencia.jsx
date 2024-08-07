@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import '../../style/style.css';
-import { useNavigate } from 'react-router-dom';
 
 export default function CardAlunoFrequencia({ id, nome_aluno, idade, telefone, presente, justificativa, onPresenteChange, onJustificativaChange }) {
 
@@ -29,68 +28,51 @@ export default function CardAlunoFrequencia({ id, nome_aluno, idade, telefone, p
 
             <div className="profissaoDiv">
                 <div className="opdiv">
-
                     <input
                         type="radio"
                         name={`presenca-${id}`}
-                        id={`presente`}
+                        id={`presenca-presente-${id}`}
                         value="presente"
                         checked={localPresente === 'presente'}
                         onChange={handlePresenteChange}
                     />
-
-                    <label htmlFor={`presente`}>Presente</label>
-
-
-
+                    <label htmlFor={`presenca-presente-${id}`}>Presente</label>
                 </div>
 
                 <div className="opdiv">
-
                     <input
                         type="radio"
                         name={`presenca-${id}`}
-                        id="ausente"
+                        id={`presenca-ausente-${id}`}
                         value="ausente"
                         checked={localPresente === 'ausente'}
                         onChange={handlePresenteChange}
                     />
-
-                    <label htmlFor={`ausente`}>Ausente</label>
-
-
-
+                    <label htmlFor={`presenca-ausente-${id}`}>Ausente</label>
                 </div>
 
                 <div className="opdiv">
-
                     <input
                         type="radio"
                         name={`presenca-${id}`}
-                        id="justificada"
+                        id={`presenca-justificada-${id}`}
                         value="justificada"
                         checked={localPresente === 'justificada'}
                         onChange={handlePresenteChange}
                     />
-
-                    <label htmlFor={`justificada`}>Justificada</label>
-
-
-
+                    <label htmlFor={`presenca-justificada-${id}`}>Justificada</label>
                 </div>
+            </div>
 
-            </div>
-            <div>
-                <label>
-                    Justificativa:
-                    <textarea
-                        value={localJustificativa}
-                        onChange={handleJustificativaChange}
-                        rows="4"  // Ajuste o número de linhas conforme necessário
-                        cols="50" // Ajuste a largura conforme necessário
-                    />
-                </label>
-            </div>
+            {localPresente === 'justificada' && (
+                <textarea
+                    value={localJustificativa}
+                    placeholder='Adicionar justificativa'
+                    onChange={handleJustificativaChange}
+                    rows="4"
+                    cols="50"
+                />
+            )}
         </div>
     );
 }

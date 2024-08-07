@@ -143,8 +143,8 @@ const TelaCadastrarAula = () => {
                 ) : (
                     alunos.map(aluno => (
                         <CardAlunoFrequencia
-                            key={aluno.id}
-                            id={aluno.id}
+                            key={aluno.id_aluno}
+                            id={aluno.id_aluno}
                             nome_aluno={aluno.nome_aluno}
                             idade={aluno.idade}
                             telefone={aluno.telefone}

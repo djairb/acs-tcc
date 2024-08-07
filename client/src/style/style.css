@@ -113,6 +113,14 @@
   
 }
 
+.containerCardAlunoFrequencia textarea{
+  width: 100%;
+  margin-bottom: 10px;
+  border: 1px solid #f1892a;
+  
+
+}
+
 .error-message {
   color: red;
   font-size: 14px;
