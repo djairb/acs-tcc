@@ -7,7 +7,6 @@ import Axios from "axios";
 import CardAlunoFrequencia from '../../componentes/CardAlunoFrequencia/CardAlunoFrequencia';
 
 const TelaCadastrarAula = () => {
-
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
 
@@ -20,14 +19,6 @@ const TelaCadastrarAula = () => {
             navigate('/login');
         }
     }, [user, navigate]);
-
-    useEffect(()=>{
-
-        console.log(alunos)
-
-
-
-    }, [alunos])
 
     useEffect(() => {
         const carregarTurmas = async () => {
@@ -43,6 +34,10 @@ const TelaCadastrarAula = () => {
         };
         carregarTurmas();
     }, [user.id_educador]);
+
+    useEffect(() => {
+        console.log(alunos);
+    }, [alunos]);
 
     const selectedTurmaId = watch('id_turma');
 
@@ -69,15 +64,18 @@ const TelaCadastrarAula = () => {
     }, [selectedTurmaId]);
 
     const handlePresenteChange = (id, value) => {
+        console.log('Presente changed:', id, value); // Debugging
         const updatedAlunos = alunos.map(a =>
-            a.id === id ? { ...a, presente: value } : a
+            a.id_aluno === id ? { ...a, presente: value } : a
         );
         setAlunos(updatedAlunos);
+        
     };
 
     const handleJustificativaChange = (id, value) => {
+        console.log('Justificativa changed:', id, value); // Debugging
         const updatedAlunos = alunos.map(a =>
-            a.id === id ? { ...a, justificativa: value } : a
+            a.id_aluno === id ? { ...a, justificativa: value } : a
         );
         setAlunos(updatedAlunos);
     };

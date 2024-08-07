@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../../style/style.css';
 
 export default function CardAlunoFrequencia({ id, nome_aluno, presente, justificativa, onPresenteChange, onJustificativaChange }) {
 
     const [localPresente, setLocalPresente] = useState(presente);
     const [localJustificativa, setLocalJustificativa] = useState(justificativa);
+
+    useEffect(() => {
+        setLocalPresente(presente);
+    }, [presente]);
+
+    useEffect(() => {
+        setLocalJustificativa(justificativa);
+    }, [justificativa]);
 
     const handlePresenteChange = (e) => {
         const newPresente = e.target.value;
