@@ -94,18 +94,18 @@
 
 
 
-.formLogin .profissaoDiv .opdiv{
+.formLogin .profissaoDiv .opdiv, .containerCardAlunoFrequencia .profissaoDiv .opdiv{
   display: flex;
   gap: 3px;
 }
 
-.formLogin .profissaoDiv .opdiv input, .formLogin .profissaoDiv .opdiv label{
+.formLogin .profissaoDiv .opdiv input, .formLogin .profissaoDiv .opdiv label, .containerCardAlunoFrequencia .profissaoDiv .opdiv input, .containerCardAlunoFrequencia .profissaoDiv .opdiv label{
   width: auto;
   height: auto;
   cursor: pointer;
 }
 
-.formLogin .profissaoDiv{
+.formLogin .profissaoDiv, .containerCardAlunoFrequencia .profissaoDiv{
   display: flex;
   width: 90%;
   
@@ -290,7 +290,7 @@
   animation: spin 2s linear infinite;
 }
 
-.containerCardTurma, .containerCardAluno{
+.containerCardTurma, .containerCardAluno, .containerCardAlunoFrequencia{
   width: 60%;
   border: 2px solid #f1892a;
   min-height: 150px;
@@ -305,7 +305,7 @@
   
 }
 
-.containerCardAluno{
+.containerCardAluno, .containerCardAlunoFrequencia{
   max-width: 500px;
   width: 100%;
   border: none;
@@ -313,17 +313,13 @@
   border-top: 1px solid #f1892a;;
   min-height: 100px;
   cursor: pointer;
-  gap: 10px;
-  
-  
-  
-  
+  gap: 10px; 
  
 
   
 }
 
-.containerCardAluno h1{
+.containerCardAluno h1, .containerCardAlunoFrequencia h1{
   font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
@@ -335,6 +331,8 @@
   
   
 }
+
+
 
 
 .containerCardTurma:hover, .containerCardAluno:hover {

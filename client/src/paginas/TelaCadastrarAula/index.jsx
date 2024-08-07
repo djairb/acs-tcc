@@ -1,96 +1,84 @@
 import React, { useContext, useEffect, useState } from 'react';
 import '../../style/style.css';
-import { useLocation, useNavigate } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
-
 import { useForm } from 'react-hook-form';
-
 import Axios from "axios";
-import DialogInserirAlunoArray from '../../componentes/dialogInserirAlunoArray/DialogInserirAlunoArray';
-import CardAluno from '../../componentes/CardAluno/CardAluno';
+import CardAlunoFrequencia from '../../componentes/CardAlunoFrequencia/CardAlunoFrequencia';
 
 const TelaCadastrarAula = () => {
 
     const navigate = useNavigate();
-
-    
-
     const { user } = useContext(UserContext);
 
     const [turmas, setTurmas] = useState([]);
-
-    const [turmaId, setTurmaId] = useState();
-
     const [alunos, setAlunos] = useState([]);
-
     const { register, formState: { errors }, handleSubmit, watch } = useForm();
 
-
     useEffect(() => {
-
         if (user.id === null) {
-            navigate('/login')
+            navigate('/login');
         }
-
-    }, [user]);
+    }, [user, navigate]);
 
     useEffect(() => {
         const carregarTurmas = async () => {
-
             try {
-
-
                 const response = await Axios.get('http://localhost:3001/getAllTurmasByIdEducador', {
                     params: { id: user.id_educador }
                 });
-
                 setTurmas(response.data);
-
             } catch (error) {
-
                 console.error('Erro ao carregar turmas:', error);
-
                 alert("Ocorreu um erro ao tentar carregar as turmas. Por favor, tente novamente mais tarde.");
             }
         };
-
         carregarTurmas();
     }, [user.id_educador]);
 
     const selectedTurmaId = watch('id_turma');
 
     useEffect(() => {
-        const carregarAlunos = async () => {
-
-            try {
-
-
-                const response = await Axios.get('http://localhost:3001/getAlunosByIdTurma', {
-                    params: { id: selectedTurmaId }
-                });
-                
-                setAlunos(response.data);
-
-            } catch (error) {
-
-                console.error('Erro ao carregar turmas:', error);
-
-                alert("Ocorreu um erro ao tentar carregar as turmas. Por favor, tente novamente mais tarde.");
-            }
-        };
-
-        carregarAlunos();
+        if (selectedTurmaId) {
+            const carregarAlunos = async () => {
+                try {
+                    const response = await Axios.get('http://localhost:3001/getAlunosByIdTurma', {
+                        params: { id: selectedTurmaId }
+                    });
+                    const alunosAtualizados = response.data.map(aluno => ({
+                        ...aluno,
+                        presente: '', // Inicialmente sem seleção
+                        justificativa: ''
+                    }));
+                    setAlunos(alunosAtualizados);
+                } catch (error) {
+                    console.error('Erro ao carregar alunos:', error);
+                    alert("Ocorreu um erro ao tentar carregar os alunos. Por favor, tente novamente mais tarde.");
+                }
+            };
+            carregarAlunos();
+        }
     }, [selectedTurmaId]);
-    
+
+    const handlePresenteChange = (id, value) => {
+        const updatedAlunos = alunos.map(a =>
+            a.id === id ? { ...a, presente: value } : a
+        );
+        setAlunos(updatedAlunos);
+    };
+
+    const handleJustificativaChange = (id, value) => {
+        const updatedAlunos = alunos.map(a =>
+            a.id === id ? { ...a, justificativa: value } : a
+        );
+        setAlunos(updatedAlunos);
+    };
 
     const onSubmit = async (data) => {
-
         if (alunos.length === 0) {
-            alert("Sem alunos cadastrados")
-            return; //retornar depois de verificar que a lista local ta vazia
+            alert("Sem alunos cadastrados");
+            return;
         }
-
 
         try {
             await Axios.post("http://localhost:3001/inserirTurma", {
@@ -98,29 +86,20 @@ const TelaCadastrarAula = () => {
                 projeto: data.projeto,
                 turno: data.turno,
                 id_educador: user.id_educador,
-                alunos:alunos
+                alunos: alunos
             });
-
-            navigate('/tela-turmas')
-
-
+            navigate('/tela-turmas');
         } catch (error) {
             console.error('Erro ao tentar fazer login:', error);
             alert("Ocorreu um erro ao tentar inserir as turmas. Por favor, tente novamente mais tarde.");
         }
-
     };
 
     return (
         <main className='mainPage'>
-
             <h1 className='titlePage'>Cadastrar Aula</h1>
-
             <div className='divInputsMain'>
-
-
                 <label>Data da Aula:</label>
-
                 <input
                     type='date'
                     placeholder='Escolha a data'
@@ -130,15 +109,12 @@ const TelaCadastrarAula = () => {
                 {errors.data_aula && <p className="error-message">Data da aula é obrigatória</p>}
 
                 <label>Selecionar Turma:</label>
-
                 <select
-
                     className={errors.id_turma && "input-error"}
                     defaultValue="0"
                     {...register("id_turma", { validate: (value) => value !== "0" })}
                 >
                     <option value="0">Selecionar Projeto</option>
-
                     {turmas.length === 0 ? (
                         <option value="" disabled>Não há turmas cadastradas</option>
                     ) : (
@@ -152,55 +128,39 @@ const TelaCadastrarAula = () => {
                 {errors?.id_turma?.type === "validate" && (<p className="error-message">Selecione uma Turma</p>)}
 
                 <label>Descrição:</label>
-
                 <textarea
                     placeholder='Adicionar descrição da aula'
                     className={errors.descricao ? "inputDescricao input-error" : "inputDescricao"}
                     {...register('descricao', { required: true })}
-                    rows="5"  // Ajuste o número de linhas conforme necessário
-                    cols="50"  // Ajuste a largura conforme necessário
+                    rows="5"
+                    cols="50"
                 />
                 {errors.descricao && <p className="error-message">Descrição é obrigatória</p>}
 
-
                 <label>Frequência:</label>
-
-                {alunos.length === 0 ? <p>Selecionar Turma</p> :
-
+                {alunos.length === 0 ? (
+                    <p>Selecione uma Turma para ver os alunos.</p>
+                ) : (
                     alunos.map(aluno => (
-
-                        <CardAluno
-
+                        <CardAlunoFrequencia
                             key={aluno.id}
                             id={aluno.id}
                             nome_aluno={aluno.nome_aluno}
                             idade={aluno.idade}
                             telefone={aluno.telefone}
-                            
-
-
+                            presente={aluno.presente}
+                            justificativa={aluno.justificativa}
+                            onPresenteChange={handlePresenteChange}
+                            onJustificativaChange={handleJustificativaChange}
                         />
-
                     ))
-                }
-
-
-
+                )}
             </div>
-
             <div className='divBotoesInputs'>
-
-                <button className='botaoInputs' >Voltar</button>
-
-                {/* <button className='botaoInputs' onClick={inserirAluno}>Salvar Aula</button> */}
-
-
+                <button className='botaoInputs' onClick={() => navigate(-1)}>Voltar</button>
+                <button className='botaoInputs' onClick={handleSubmit(onSubmit)}>Salvar Aula</button>
             </div>
-
-
-
         </main>
-
     );
 };
 
