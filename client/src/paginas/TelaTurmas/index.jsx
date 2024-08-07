@@ -24,7 +24,7 @@ const TelaTurmas = () => {
     
     const navegarBotaoVoltar = () =>{
 
-        navigate('/home-educador');
+        navigate(-1);
     }
 
     const [turmas, setTurmas] = useState([]);

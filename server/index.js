@@ -179,6 +179,65 @@ app.post("/getUserLogin", (req, res) => {
 // });
 
 
+const inserirAula = (id_turma, data_aula, descricao, id_educador) => {
+    return new Promise((resolve, reject) => {
+        let SQL = 'INSERT INTO Aulas (id_turma, data_aula, descricao, id_educador) VALUES (?, ?, ?, ?)';
+        db.query(SQL, [id_turma, data_aula, descricao, id_educador], (err, result) => {
+            if (err) {
+                reject("Erro ao inserir turma");
+            } else {
+                resolve(result.insertId);
+            }
+        });
+    });
+};
+
+const inserirPresenca = (listaAlunos, id_aula) => {
+    let SQLAlunos = 'INSERT INTO presencas_aulas (id_aula, id_aluno, presente, justificativa) VALUES (?, ?, ?, ?)';
+
+    console.log(listaAlunos)
+    console.log(id_aula)
+    
+    // Criar uma lista de Promises para as inserções dos alunos
+    let promises = listaAlunos.map(aluno => {
+        return new Promise((resolve, reject) => {
+            db.query(SQLAlunos, [id_aula, aluno.id_aluno, aluno.presente, aluno.justificativa], (err, result) => {
+                if (err) {
+                    reject("Erro ao inserir presença");
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+    });
+
+    // Retorna a Promise que resolve quando todas as Promises de inserção de alunos forem concluídas
+    
+    return Promise.all(promises);
+};
+
+
+
+app.post("/cadastrarAula", (req, res) => {    
+    let { id_turma, data_aula, descricao, id_educador, listaAlunos } = req.body;
+
+    inserirAula(id_turma, data_aula, descricao, id_educador)
+        .then(id_aula => {
+            // Inserir alunos após a turma ser inserida
+            return inserirPresenca(listaAlunos, id_aula);
+        })
+        .then(() => {
+            // Enviar a resposta quando todos os alunos forem inseridos
+            res.send("Turma e alunos inseridos com sucesso");
+        })
+        .catch(error => {
+            // Tratar erros
+            console.error(error);
+            res.status(500).send(error);
+        });
+});
+
+
 const inserirTurma = (nome_turma, turno, projeto, id_educador) => {
     return new Promise((resolve, reject) => {
         let SQL = 'INSERT INTO Turmas (nome_turma, turno, projeto, id_educador) VALUES (?, ?, ?, ?)';

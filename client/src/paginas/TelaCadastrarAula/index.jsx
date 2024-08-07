@@ -15,7 +15,7 @@ const TelaCadastrarAula = () => {
     const { register, formState: { errors }, handleSubmit, watch } = useForm();
 
     useEffect(() => {
-        if (user.id === null) {
+        if (user.id_educador === null) {
             navigate('/login');
         }
     }, [user, navigate]);
@@ -35,9 +35,6 @@ const TelaCadastrarAula = () => {
         carregarTurmas();
     }, [user.id_educador]);
 
-    useEffect(() => {
-        console.log(alunos);
-    }, [alunos]);
 
     const selectedTurmaId = watch('id_turma');
 
@@ -64,7 +61,7 @@ const TelaCadastrarAula = () => {
     }, [selectedTurmaId]);
 
     const handlePresenteChange = (id, value) => {
-        console.log('Presente changed:', id, value); // Debugging
+        // console.log('Presente changed:', id, value); // Debugging
         const updatedAlunos = alunos.map(a =>
             a.id_aluno === id ? { ...a, presente: value } : a
         );
@@ -73,7 +70,7 @@ const TelaCadastrarAula = () => {
     };
 
     const handleJustificativaChange = (id, value) => {
-        console.log('Justificativa changed:', id, value); // Debugging
+        // console.log('Justificativa changed:', id, value); // Debugging
         const updatedAlunos = alunos.map(a =>
             a.id_aluno === id ? { ...a, justificativa: value } : a
         );
@@ -84,22 +81,21 @@ const TelaCadastrarAula = () => {
 
         const todasFaltasRegistradas = alunos.every(aluno => aluno.presente !== '');
 
-        console.log(todasFaltasRegistradas)
-
         if (!todasFaltasRegistradas) {
             alert("Ainda há alunos sem registro.");
             return;
         }
 
+        
         try {
-            await Axios.post("http://localhost:3001/inserirTurma", {
-                nome_turma: data.nome_turma,
-                projeto: data.projeto,
-                turno: data.turno,
+            await Axios.post("http://localhost:3001/cadastrarAula", {
+                id_turma: data.id_turma,
+                data_aula: data.data_aula,
+                descricao: data.descricao,
                 id_educador: user.id_educador,
-                alunos: alunos
+                listaAlunos: alunos
             });
-            navigate('/tela-turmas');
+            navigate(-1);
         } catch (error) {
             console.error('Erro ao tentar fazer login:', error);
             alert("Ocorreu um erro ao tentar inserir as turmas. Por favor, tente novamente mais tarde.");

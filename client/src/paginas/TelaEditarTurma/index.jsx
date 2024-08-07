@@ -22,7 +22,7 @@ const TelaEditarTurma = () => {
 
     useEffect(() => {
 
-        if (user.id === null) {
+        if (user.id_educador === null ) {
             navigate('/login')
         }
 
@@ -72,7 +72,7 @@ const TelaEditarTurma = () => {
 
     const navegarBotaoVoltar = () => {
 
-        navigate('/tela-turmas');
+        navigate(-1);
     }
 
     const inserirAluno = () => {
