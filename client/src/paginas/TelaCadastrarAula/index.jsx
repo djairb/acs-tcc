@@ -21,6 +21,14 @@ const TelaCadastrarAula = () => {
         }
     }, [user, navigate]);
 
+    useEffect(()=>{
+
+        console.log(alunos)
+
+
+
+    }, [alunos])
+
     useEffect(() => {
         const carregarTurmas = async () => {
             try {
