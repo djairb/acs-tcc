@@ -114,8 +114,8 @@
 }
 
 .containerCardAlunoFrequencia textarea{
-  width: 100%;
-  margin-bottom: 10px;
+  width: 90%;
+  margin-bottom: 5px;
   border: 1px solid #f1892a;
   
 
@@ -327,6 +327,16 @@
   
 }
 
+.containerCardAlunoFrequencia{
+  border: 1px solid #f1892a;;
+  border-bottom: 3px solid #f1892a;
+  
+}
+
+.containerCardAlunoFrequencia .profissaoDiv .opdiv label{
+  font-size: 1.2rem;
+}
+
 .containerCardAluno h1, .containerCardAlunoFrequencia h1{
   font-size: 1.5rem;
   font-weight: bold;
@@ -379,7 +389,7 @@
     
   }
 
-  .divInputsDialog input, .divInputsDialog select, .divInputsMain input, .divInputsMain select{
+  .divInputsDialog input, .divInputsDialog select, .divInputsMain input, .divInputsMain select, .divInputsMain textarea{
     width: 100%;
     margin: 0 auto;
   }
@@ -417,13 +427,13 @@
 
   .containerCardAluno{
     
-    
-    
-    gap: 2px;
-    
-   
+    gap: 2px;   
   
     
+  }
+
+  .containerCardAlunoFrequencia .profissaoDiv{
+    width: 100%;
   }
   
 

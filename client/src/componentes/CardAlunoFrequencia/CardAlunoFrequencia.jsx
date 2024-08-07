@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import '../../style/style.css';
 
-export default function CardAlunoFrequencia({ id, nome_aluno, idade, telefone, presente, justificativa, onPresenteChange, onJustificativaChange }) {
+export default function CardAlunoFrequencia({ id, nome_aluno, presente, justificativa, onPresenteChange, onJustificativaChange }) {
 
     const [localPresente, setLocalPresente] = useState(presente);
     const [localJustificativa, setLocalJustificativa] = useState(justificativa);

@@ -146,8 +146,6 @@ const TelaCadastrarAula = () => {
                             key={aluno.id_aluno}
                             id={aluno.id_aluno}
                             nome_aluno={aluno.nome_aluno}
-                            idade={aluno.idade}
-                            telefone={aluno.telefone}
                             presente={aluno.presente}
                             justificativa={aluno.justificativa}
                             onPresenteChange={handlePresenteChange}
