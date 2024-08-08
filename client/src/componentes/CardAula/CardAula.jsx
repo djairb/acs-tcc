@@ -9,7 +9,7 @@ export default function CardAula(props) {
     const handleClickCard = () => {
 
         //IR PRA ABA DE TURMA
-        navigate('/tela-editar-turma', { state: props});
+        navigate('/tela-editar-aula', { state: props});
         // passa o objeto pra ela pre-carregar. se tiver id o botao 
     }
 
@@ -18,16 +18,9 @@ export default function CardAula(props) {
   // Formatando a data para um formato legível
     const formattedDate = date.toLocaleDateString();
 
- 
-
-
-   
-
     return (
 
         <>
-
-
             <div className="containerCardAula">
 
                 <p>Aula Projeto</p>
@@ -40,7 +33,7 @@ export default function CardAula(props) {
                 <p>Turno:</p>
                 <h1>{props.turno_aula}</h1>
 
-                <button>Ver Aula</button>
+                <button onClick={handleClickCard}>Ver Aula</button>
                 
                
 

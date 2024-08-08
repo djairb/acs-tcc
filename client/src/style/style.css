@@ -200,8 +200,8 @@
 }
 
 .containerCardAula button{
-  width: 30%;
-  height: 30px;
+  width: 50%;
+  height: 40px;
   border-radius: 4px;
   font-size: 1rem;
   margin-bottom: 10px;
@@ -489,6 +489,14 @@
 
   .containerCardAlunoFrequencia .profissaoDiv{
     width: 100%;
+  }
+
+  .containerCardAula{
+    
+    flex-basis: 100%;
+    
+    
+  
   }
   
 

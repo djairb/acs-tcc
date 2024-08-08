@@ -103,14 +103,8 @@ const TelaEditarTurma = () => {
       };
 
 
-    const navegarBotaoCadastrarTurma = () => {
-
-        navigate('/home-educador');
-    }
-
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    
 
     const [openDialog, setOpenDialog] = useState(false);  
 
@@ -240,6 +234,7 @@ const TelaEditarTurma = () => {
                 <button className='botaoInputs' onClick={navegarBotaoVoltar}>Voltar</button>
 
                 <button className='botaoInputs' onClick={inserirAluno}>Inserir Aluno</button>
+                
 
                 <button className='botaoInputs' onClick={() => handleSubmit(onSubmit)()}>Salvar Edições</button>
 

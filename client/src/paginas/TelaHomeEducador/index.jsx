@@ -118,23 +118,14 @@ const TelaHomeEducador = () => {
                             data_aula={aula.data_aula}
                             turma_aula={aula.turma.nome_turma}
                             turno_aula={aula.turma.turno}
-                            
+                        
 
                         />
-
-                        
-                        
 
                     ))
                 }
 
-
-
-
-
             </div>
-
-
 
         </main>
 
