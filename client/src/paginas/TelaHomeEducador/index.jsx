@@ -117,7 +117,7 @@ const TelaHomeEducador = () => {
                             projeto_nome={aula.turma.projeto}
                             data_aula={aula.data_aula}
                             turma_aula={aula.turma.nome_turma}
-                            turno-aula={aula.turma.turno}
+                            turno_aula={aula.turma.turno}
                             
 
                         />
