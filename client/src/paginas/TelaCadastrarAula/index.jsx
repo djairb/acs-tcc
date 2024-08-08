@@ -95,7 +95,7 @@ const TelaCadastrarAula = () => {
                 id_educador: user.id_educador,
                 listaAlunos: alunos
             });
-            navigate(-1);
+            navigate('/home-educador');
         } catch (error) {
             console.error('Erro ao tentar fazer login:', error);
             alert("Ocorreu um erro ao tentar inserir as turmas. Por favor, tente novamente mais tarde.");
@@ -162,7 +162,7 @@ const TelaCadastrarAula = () => {
                 )}
             </div>
             <div className='divBotoesInputs'>
-                <button className='botaoInputs' onClick={() => navigate(-1)}>Voltar</button>
+                <button className='botaoInputs' onClick={() => navigate('/home-educador')}>Voltar</button>
                 <button className='botaoInputs' onClick={handleSubmit(onSubmit)}>Salvar Aula</button>
             </div>
         </main>

@@ -30,7 +30,7 @@ const TelaCadastrarTurma = () => {
 
     const navegarBotaoVoltar = () => {
 
-        navigate(-1);
+        navigate('/tela-turmas');
 
        
     }

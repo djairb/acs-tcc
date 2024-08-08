@@ -72,7 +72,7 @@ const TelaEditarTurma = () => {
 
     const navegarBotaoVoltar = () => {
 
-        navigate(-1);
+        navigate('/tela-turmas');
     }
 
     const inserirAluno = () => {
