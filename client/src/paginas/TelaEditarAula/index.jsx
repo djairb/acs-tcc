@@ -17,6 +17,8 @@ const TelaEditarAula = () => {
     const location = useLocation();
 
     const objetoAula = location.state;
+    console.log("aq")
+    console.log(objetoAula)
 
     useEffect(() => {
         if (user.id_educador === null) {
@@ -39,6 +41,18 @@ const TelaEditarAula = () => {
         };
         carregarAlunosPresenca();
     }, [user.id_educador]);
+
+    const formatDate = (isoDate) => {
+        if (!isoDate) return '';
+        const date = new Date(isoDate);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Mês começa do 0
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
+    // Converte a data ISO 8601 para YYYY-MM-DD
+    const defaultDateValue = formatDate(objetoAula.data_aula);
 
 
 
@@ -96,6 +110,7 @@ const TelaEditarAula = () => {
                 <label>Data da Aula:</label>
                 <input
                     type='date'
+                    defaultValue={defaultDateValue}
                     placeholder='Escolha a data'
                     className={errors.data_aula ? "input-error" : ""}
                     {...register('data_aula', { required: true })}
@@ -106,24 +121,15 @@ const TelaEditarAula = () => {
                 <select
                     className={errors.id_turma && "input-error"}
                     defaultValue="0"
-                    {...register("id_turma", { validate: (value) => value !== "0" })}
                 >
-                    <option value="0">Selecionar Projeto</option>
-                    {turmas.length === 0 ? (
-                        <option value="" disabled>Não há turmas cadastradas</option>
-                    ) : (
-                        turmas.map(turma => (
-                            <option key={turma.id_turma} value={turma.id_turma}>
-                                {turma.nome_turma}
-                            </option>
-                        ))
-                    )}
+                    <option value="0" disabled>{objetoAula.projeto_nome}</option>
+
                 </select>
-                {errors?.id_turma?.type === "validate" && (<p className="error-message">Selecione uma Turma</p>)}
 
                 <label>Descrição:</label>
                 <textarea
                     placeholder='Adicionar descrição da aula'
+                    defaultValue={objetoAula.descricao}
                     className={errors.descricao ? "inputDescricao input-error" : "inputDescricao"}
                     {...register('descricao', { required: true })}
                     rows="5"
@@ -131,7 +137,7 @@ const TelaEditarAula = () => {
                 />
                 {errors.descricao && <p className="error-message">Descrição é obrigatória</p>}
 
-                <label>Frequência:</label>
+                {/* <label>Frequência:</label>
                 {alunos.length === 0 ? (
                     <p>Selecione uma Turma para ver os alunos.</p>
                 ) : (
@@ -146,7 +152,7 @@ const TelaEditarAula = () => {
                             onJustificativaChange={handleJustificativaChange}
                         />
                     ))
-                )}
+                )} */}
             </div>
             <div className='divBotoesInputs'>
                 <button className='botaoInputs' onClick={() => navigate('/home-educador')}>Voltar</button>
