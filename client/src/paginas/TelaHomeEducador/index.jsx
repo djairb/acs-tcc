@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 
 import Axios from 'axios';
+import CardAula from '../../componentes/CardAula/CardAula';
 
 const TelaHomeEducador = () => {
 
@@ -74,6 +75,11 @@ const TelaHomeEducador = () => {
 
     }, []);
 
+    const aulasComTurmas = aulas.map(aula => ({
+        ...aula,
+        turma: turmas.find(turma => turma.id_turma === aula.id_turma)
+      }));
+
     return (
         <main className='mainHome'>
 
@@ -95,25 +101,32 @@ const TelaHomeEducador = () => {
 
                 {loading && <div className="spinner"></div>}
 
-               
-                {/* {aulas.length === 0 ? <p>Ainda sem alunos</p> :
+                {console.log(aulasComTurmas)}
+                                       
+           
+                {aulas.length === 0 ? <p>Ainda sem aulas</p> :
 
-                    aulas.map(aula => (
+                    aulasComTurmas.map(aula => (
 
-                        <CardEditarAluno
+                        <CardAula
 
-                            key={aluno.id_aluno}
-                            id_aluno={aluno.id_aluno}
-                            nome_aluno={aluno.nome_aluno}
-                            idade={aluno.idade}
-                            telefone={aluno.telefone}
-                            setCount={setCount}
-                            count={count}
+                            key={aula.id_aula}
+                            id_aula={aula.id_aula}
+                            id_educador={aula.id_educador}
+                            id_turma={aula.id_turma}
+                            projeto_nome={aula.turma.projeto}
+                            data_aula={aula.data_aula}
+                            turma_aula={aula.turma.nome_turma}
+                            turno-aula={aula.turma.turno}
+                            
 
                         />
 
+                        
+                        
+
                     ))
-                } */}
+                }
 
 
 

@@ -20,10 +20,11 @@ export default function CardAula(props) {
 
         <>
 
+
             <div className="containerCardAula">
 
-                <p>Nome da Turma:</p>
-                <h1>{props.nome_turma}</h1>
+                <p>Aula Projeto</p>
+                <h1>{props.projeto_nome}</h1>
                
 
             </div>
