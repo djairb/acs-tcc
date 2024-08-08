@@ -17,12 +17,8 @@ export default function CardEditarAluno(props) {
         props.setCount(props.count+1)
 
         //BUG ACONTECENDO NO DIALOG
-        
-        
-  
+      
     }, [numero]);
-
-    
 
     const handleClickCard = () => {
 
@@ -30,10 +26,7 @@ export default function CardEditarAluno(props) {
         setAberto(true);
 
       
-    }
-    
-
-    
+    } 
 
     return (
 

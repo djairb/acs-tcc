@@ -67,7 +67,7 @@ const TelaTurmas = () => {
         carregarTurmas();
         //
         
-      }, [count]);
+      }, [count, user.id_educador]);
 
 
     const botaoNavegarPaginaTurma = () =>{      
@@ -85,9 +85,9 @@ const TelaTurmas = () => {
 
             <div className='divInputsMain'>
                 {loading && <div className="spinner"></div>}
-                {turmas.length===0 && <p>não há turmas cadastradas</p>}
+                {turmas.length===0 ? <p>não há turmas cadastradas</p> :
 
-                {turmas.length>0 && turmas.map(turma => (
+                turmas.length>0 && turmas.map(turma => (
 
                     <CardTurma
 
