@@ -292,6 +292,58 @@ app.post("/inserirTurma", (req, res) => {
         });
 });
 
+const editarAula = (id_aula, data_aula, descricao) => {
+    return new Promise((resolve, reject) => {
+        let SQL = "UPDATE aulas SET data_aula = ?, descricao = ? WHERE id_aula = ?";
+        db.query(SQL, [data_aula, descricao, id_aula], (err, result) => {
+            if (err) {
+                reject("Erro ao atualizar aula"); // Mensagem de erro ajustada
+            } else {
+                resolve(result);
+            }
+        });
+    });
+};
+
+const editarPresencas = (listaAlunos, id_aula) => {
+    let SQL = 'UPDATE presencas_aulas SET presente = ?, justificativa = ? WHERE id_aula = ? AND id_aluno = ?';
+    
+    // Criar uma lista de Promises para as atualizações das presenças
+    let promises = listaAlunos.map(aluno => {
+        return new Promise((resolve, reject) => {
+            db.query(SQL, [aluno.presente, aluno.justificativa, id_aula, aluno.id_aluno], (err, result) => {
+                if (err) {
+                    reject(err); // Passa o erro para o Promise
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+    });
+
+    return Promise.all(promises);
+};
+
+app.put("/editarAulaById", (req, res) => {
+    let { data_aula, descricao, id_aula, listaAlunosPresenca } = req.body;
+
+    editarAula(id_aula, data_aula, descricao)
+        .then(() => {
+            // Atualizar presenças após a aula ser atualizada
+            return editarPresencas(listaAlunosPresenca, id_aula);
+        })
+        .then(() => {
+            // Enviar a resposta quando todas as presenças forem atualizadas
+            res.send("Aula Atualizada");
+        })
+        .catch(error => {
+            // Tratar erros
+            console.error(error);
+            res.status(500).send(error);
+        });
+});
+
+
 
 app.put("/editarAlunoById", (req, res) =>{
 
@@ -318,7 +370,6 @@ app.put("/editarAlunoById", (req, res) =>{
 
 })
 
-
 app.put("/editarTurmaById", (req, res) =>{
 
     let { nome_turma, projeto, turno, id_turma } = req.body;
@@ -341,9 +392,6 @@ app.put("/editarTurmaById", (req, res) =>{
 
 
     })
-
-
-
 })
 
 
@@ -394,6 +442,26 @@ app.get("/getTurmas", (req, res) =>{
 
 });
 
+
+app.get("/getAllPresencasByIdAula", (req, res) =>{
+
+    const { id } = req.query;
+
+    let SQL= "SELECT * FROM aulas WHERE id_aula = ?";
+
+    db.query(SQL, [id], (err, result) => {
+
+        if (err) {
+            console.log(err);
+            res.status(500).send("Erro ao consultar banco de dados");
+        } else {
+            
+            res.send(result);
+            
+        }
+    });
+
+});
 
 
 app.get("/getAllTurmasByIdEducador", (req, res) =>{

@@ -99,10 +99,7 @@ const TelaHomeEducador = () => {
 
             <div className='aulasDiv'>
 
-                {loading && <div className="spinner"></div>}
-
-                {console.log(aulasComTurmas)}
-                                       
+                {loading && <div className="spinner"></div>}                                       
            
                 {aulas.length === 0 ? <p>Ainda sem aulas</p> :
 

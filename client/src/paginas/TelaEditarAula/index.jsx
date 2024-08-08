@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import '../../style/style.css';
-import { useNavigate } from 'react-router-dom';
+import {  useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 import { useForm } from 'react-hook-form';
 import Axios from "axios";
@@ -11,8 +11,12 @@ const TelaEditarAula = () => {
     const { user } = useContext(UserContext);
 
     const [turmas, setTurmas] = useState([]);
-    const [alunos, setAlunos] = useState([]);
+    const [alunosPresenca, setAlunosPresenca] = useState([]);
     const { register, formState: { errors }, handleSubmit, watch } = useForm();
+
+    const location = useLocation();
+
+    const objetoAula = location.state;
 
     useEffect(() => {
         if (user.id_educador === null) {
@@ -21,65 +25,43 @@ const TelaEditarAula = () => {
     }, [user, navigate]);
 
     useEffect(() => {
-        const carregarTurmas = async () => {
+        const carregarAlunosPresenca = async () => {
             try {
-                const response = await Axios.get('http://localhost:3001/getAllTurmasByIdEducador', {
-                    params: { id: user.id_educador }
+                const response = await Axios.get('http://localhost:3001/getAllPresencasByIdAula', {
+                    params: { id: objetoAula.id_aula }
                 });
-                setTurmas(response.data);
+                setAlunosPresenca(response.data);
+                
             } catch (error) {
                 console.error('Erro ao carregar turmas:', error);
                 alert("Ocorreu um erro ao tentar carregar as turmas. Por favor, tente novamente mais tarde.");
             }
         };
-        carregarTurmas();
+        carregarAlunosPresenca();
     }, [user.id_educador]);
 
 
-    const selectedTurmaId = watch('id_turma');
-
-    useEffect(() => {
-        if (selectedTurmaId) {
-            const carregarAlunos = async () => {
-                try {
-                    const response = await Axios.get('http://localhost:3001/getAlunosByIdTurma', {
-                        params: { id: selectedTurmaId }
-                    });
-                    const alunosAtualizados = response.data.map(aluno => ({
-                        ...aluno,
-                        presente: '', // Inicialmente sem seleção
-                        justificativa: ''
-                    }));
-                    setAlunos(alunosAtualizados);
-                } catch (error) {
-                    console.error('Erro ao carregar alunos:', error);
-                    alert("Ocorreu um erro ao tentar carregar os alunos. Por favor, tente novamente mais tarde.");
-                }
-            };
-            carregarAlunos();
-        }
-    }, [selectedTurmaId]);
 
     const handlePresenteChange = (id, value) => {
         // console.log('Presente changed:', id, value); // Debugging
-        const updatedAlunos = alunos.map(a =>
+        const updatedAlunos = alunosPresenca.map(a =>
             a.id_aluno === id ? { ...a, presente: value } : a
         );
-        setAlunos(updatedAlunos);
+        setAlunosPresenca(updatedAlunos);
 
     };
 
     const handleJustificativaChange = (id, value) => {
         // console.log('Justificativa changed:', id, value); // Debugging
-        const updatedAlunos = alunos.map(a =>
+        const updatedAlunos = alunosPresenca.map(a =>
             a.id_aluno === id ? { ...a, justificativa: value } : a
         );
-        setAlunos(updatedAlunos);
+        setAlunosPresenca(updatedAlunos);
     };
 
     const onSubmit = async (data) => {
 
-        const todasFaltasRegistradas = alunos.every(aluno => aluno.presente !== '');
+        const todasFaltasRegistradas = alunosPresenca.every(aluno => aluno.presente !== '');
 
         if (!todasFaltasRegistradas) {
             alert("Ainda há alunos sem registro.");
@@ -88,12 +70,17 @@ const TelaEditarAula = () => {
 
         
         try {
-            await Axios.post("http://localhost:3001/cadastrarAula", {
-                id_turma: data.id_turma,
+            await Axios.post("http://localhost:3001/editarAulaById", {
+
+                //nem id_turma (porque nao vou mudar turma -- pq teria q alterar todo o registro de aulas),
+                //nem id_educador, nem o proprio id da aula. so muda data e descricao
+
+                //isso tambem faz as mudanças no array de presenças
+                id_aula: objetoAula.id_aula,
                 data_aula: data.data_aula,
                 descricao: data.descricao,
-                id_educador: user.id_educador,
-                listaAlunos: alunos
+                
+                listaAlunosPresenca: alunosPresenca
             });
             navigate('/home-educador');
         } catch (error) {
@@ -104,7 +91,7 @@ const TelaEditarAula = () => {
 
     return (
         <main className='mainPage'>
-            <h1 className='titlePage'>Cadastrar Aula</h1>
+            <h1 className='titlePage'>Editar Aula</h1>
             <div className='divInputsMain'>
                 <label>Data da Aula:</label>
                 <input

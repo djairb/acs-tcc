@@ -18,6 +18,10 @@ export default function CardAula(props) {
   // Formatando a data para um formato legível
     const formattedDate = date.toLocaleDateString();
 
+    console.log(props)
+
+
+
     return (
 
         <>
@@ -34,6 +38,8 @@ export default function CardAula(props) {
                 <h1>{props.turno_aula}</h1>
 
                 <button onClick={handleClickCard}>Ver Aula</button>
+
+                
                 
                
 
