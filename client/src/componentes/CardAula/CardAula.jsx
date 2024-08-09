@@ -17,8 +17,7 @@ export default function CardAula(props) {
 
   // Formatando a data para um formato legível
     const formattedDate = date.toLocaleDateString();
-
-    console.log(props)
+    
 
 
 

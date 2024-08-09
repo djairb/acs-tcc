@@ -60,9 +60,9 @@ const TelaHomeEducador = () => {
                 setAulas(aulasResponse.data);
                 setTurmas(turmasResponse.data);
                 setLoading(false);
-                
-                
-                
+
+
+
             } catch (error) {
                 console.error('Erro ao tentar fazer login:', error);
                 alert("Ocorreu um erro ao tentar fazer login. Por favor, tente novamente mais tarde.");
@@ -78,7 +78,7 @@ const TelaHomeEducador = () => {
     const aulasComTurmas = aulas.map(aula => ({
         ...aula,
         turma: turmas.find(turma => turma.id_turma === aula.id_turma)
-      }));
+    }));
 
     return (
         <main className='mainHome'>
@@ -99,8 +99,8 @@ const TelaHomeEducador = () => {
 
             <div className='aulasDiv'>
 
-                {loading && <div className="spinner"></div>}                                       
-           
+                {loading && <div className="spinner"></div>}
+
                 {aulas.length === 0 ? <p>Ainda sem aulas</p> :
 
                     aulasComTurmas.map(aula => (
@@ -115,7 +115,9 @@ const TelaHomeEducador = () => {
                             data_aula={aula.data_aula}
                             turma_aula={aula.turma.nome_turma}
                             turno_aula={aula.turma.turno}
-                        
+                            descricao={aula.descricao}
+
+
 
                         />
 

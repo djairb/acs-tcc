@@ -42,7 +42,7 @@ const TelaCadastrarAula = () => {
         if (selectedTurmaId) {
             const carregarAlunos = async () => {
                 try {
-                    const response = await Axios.get('http://localhost:3001/getAlunosByIdTurma', {
+                    const response = await Axios.get('http://localhost:3001/getAllAlunosByIdTurma', {
                         params: { id: selectedTurmaId }
                     });
                     const alunosAtualizados = response.data.map(aluno => ({

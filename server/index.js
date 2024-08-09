@@ -416,14 +416,6 @@ app.post("/inserirAlunoByIdTurma", (req, res) => {
     });
 });
 
-
-
-
-
-
-
-
-
 app.get("/getTurmas", (req, res) =>{
 
     let SQL= "SELECT * FROM turmas";
@@ -447,7 +439,7 @@ app.get("/getAllPresencasByIdAula", (req, res) =>{
 
     const { id } = req.query;
 
-    let SQL= "SELECT * FROM aulas WHERE id_aula = ?";
+    let SQL= "SELECT * FROM presencas_aulas WHERE id_aula = ?";
 
     db.query(SQL, [id], (err, result) => {
 
@@ -485,6 +477,27 @@ app.get("/getAllTurmasByIdEducador", (req, res) =>{
 
 });
 
+app.get("/getAllAlunosByIdTurma", (req, res) =>{
+
+    const { id } = req.query;
+
+
+    let SQL= "SELECT * FROM alunos WHERE id_turma = ?";
+
+    db.query(SQL, [id], (err, result) => {
+
+        if (err) {
+            console.log(err);
+            res.status(500).send("Erro ao consultar banco de dados");
+        } else {
+            
+            res.send(result);
+            
+        }
+    });
+
+});
+
 
 app.get("/getAllAulasByIdEducador", (req, res) =>{
 
@@ -507,51 +520,26 @@ app.get("/getAllAulasByIdEducador", (req, res) =>{
 
 });
 
-app.get("/getAlunosByIdTurma", (req, res) =>{
+// app.get("/getAlunosByIdTurma", (req, res) =>{
 
-    const { id } = req.query;
+//     const { id } = req.query;
 
 
-    let SQL= "SELECT * FROM alunos WHERE id_turma = ?";
+//     let SQL= "SELECT * FROM alunos WHERE id_turma = ?";
 
-    db.query(SQL, [id], (err, result) => {
+//     db.query(SQL, [id], (err, result) => {
 
-        if (err) {
-            console.log(err);
-            res.status(500).send("Erro ao consultar banco de dados");
-        } else {
+//         if (err) {
+//             console.log(err);
+//             res.status(500).send("Erro ao consultar banco de dados");
+//         } else {
             
-            res.send(result);
+//             res.send(result);
             
-        }
-    });
+//         }
+//     });
 
-});
-
-
-
-
-app.get("/getAllAlunosByIdTurma", (req, res) =>{
-
-    const { id } = req.query;
-
-
-    let SQL= "SELECT * FROM alunos WHERE id_turma = ?";
-
-    db.query(SQL, [id], (err, result) => {
-
-        if (err) {
-            console.log(err);
-            res.status(500).send("Erro ao consultar banco de dados");
-        } else {
-            
-            res.send(result);
-            
-        }
-    });
-
-});
-
+// });
 
 app.get("/getTurmaByIdEducador", (req, res) =>{
 

@@ -1,24 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
 import '../../style/style.css';
-import {  useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 import { useForm } from 'react-hook-form';
 import Axios from "axios";
-import CardAlunoFrequencia from '../../componentes/CardAlunoFrequencia/CardAlunoFrequencia';
+import { format } from 'date-fns';
 
 const TelaEditarAula = () => {
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
 
-    const [turmas, setTurmas] = useState([]);
+    const [alunosTurma, setAlunosTurma] = useState([]);
     const [alunosPresenca, setAlunosPresenca] = useState([]);
     const { register, formState: { errors }, handleSubmit, watch } = useForm();
 
     const location = useLocation();
 
     const objetoAula = location.state;
-    console.log("aq")
-    console.log(objetoAula)
+
 
     useEffect(() => {
         if (user.id_educador === null) {
@@ -27,31 +26,37 @@ const TelaEditarAula = () => {
     }, [user, navigate]);
 
     useEffect(() => {
-        const carregarAlunosPresenca = async () => {
+        const carregarDados = async () => {
             try {
-                const response = await Axios.get('http://localhost:3001/getAllPresencasByIdAula', {
+                // Carrega as presenças
+                const presencasResponse = await Axios.get('http://localhost:3001/getAllPresencasByIdAula', {
                     params: { id: objetoAula.id_aula }
                 });
-                setAlunosPresenca(response.data);
+                setAlunosPresenca(presencasResponse.data);
+
+                // Carrega os alunos da turma
+                const alunosResponse = await Axios.get('http://localhost:3001/getAllAlunosByIdTurma', {
+                    params: { id: objetoAula.id_turma }
+                });
+                setAlunosTurma(alunosResponse.data);
                 
             } catch (error) {
-                console.error('Erro ao carregar turmas:', error);
-                alert("Ocorreu um erro ao tentar carregar as turmas. Por favor, tente novamente mais tarde.");
+                console.error('Erro ao carregar dados:', error);
+                alert("Ocorreu um erro ao tentar carregar os dados. Por favor, tente novamente mais tarde.");
             }
         };
-        carregarAlunosPresenca();
+
+        carregarDados();
     }, [user.id_educador]);
 
-    const formatDate = (isoDate) => {
-        if (!isoDate) return '';
-        const date = new Date(isoDate);
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0'); // Mês começa do 0
-        const day = String(date.getDate()).padStart(2, '0');
-        return `${year}-${month}-${day}`;
-    };
 
-    // Converte a data ISO 8601 para YYYY-MM-DD
+    const presencaComAlunos = alunosPresenca.map(presenca => ({
+        ...presenca,
+        aluno: alunosTurma.find(alunoTurma => alunoTurma.id_aluno === presenca.id_aluno)
+    }));
+
+    const formatDate = (isoDate) => format(new Date(isoDate), 'yyyy-MM-dd');
+
     const defaultDateValue = formatDate(objetoAula.data_aula);
 
 
@@ -75,32 +80,34 @@ const TelaEditarAula = () => {
 
     const onSubmit = async (data) => {
 
-        const todasFaltasRegistradas = alunosPresenca.every(aluno => aluno.presente !== '');
+        console.log(data)
 
-        if (!todasFaltasRegistradas) {
-            alert("Ainda há alunos sem registro.");
-            return;
-        }
+        // const todasFaltasRegistradas = alunosPresenca.every(aluno => aluno.presente !== '');
 
-        
-        try {
-            await Axios.post("http://localhost:3001/editarAulaById", {
+        // if (!todasFaltasRegistradas) {
+        //     alert("Ainda há alunos sem registro.");
+        //     return;
+        // }
 
-                //nem id_turma (porque nao vou mudar turma -- pq teria q alterar todo o registro de aulas),
-                //nem id_educador, nem o proprio id da aula. so muda data e descricao
 
-                //isso tambem faz as mudanças no array de presenças
-                id_aula: objetoAula.id_aula,
-                data_aula: data.data_aula,
-                descricao: data.descricao,
-                
-                listaAlunosPresenca: alunosPresenca
-            });
-            navigate('/home-educador');
-        } catch (error) {
-            console.error('Erro ao tentar fazer login:', error);
-            alert("Ocorreu um erro ao tentar inserir as turmas. Por favor, tente novamente mais tarde.");
-        }
+        // try {
+        //     await Axios.post("http://localhost:3001/editarAulaById", {
+
+        //         //nem id_turma (porque nao vou mudar turma -- pq teria q alterar todo o registro de aulas),
+        //         //nem id_educador, nem o proprio id da aula. so muda data e descricao
+
+        //         //isso tambem faz as mudanças no array de presenças
+        //         id_aula: objetoAula.id_aula,
+        //         data_aula: data.data_aula,
+        //         descricao: data.descricao,
+
+        //         listaAlunosPresenca: alunosPresenca
+        //     });
+        //     navigate('/home-educador');
+        // } catch (error) {
+        //     console.error('Erro ao tentar fazer login:', error);
+        //     alert("Ocorreu um erro ao tentar inserir as turmas. Por favor, tente novamente mais tarde.");
+        // }
     };
 
     return (
@@ -137,22 +144,24 @@ const TelaEditarAula = () => {
                 />
                 {errors.descricao && <p className="error-message">Descrição é obrigatória</p>}
 
-                {/* <label>Frequência:</label>
-                {alunos.length === 0 ? (
-                    <p>Selecione uma Turma para ver os alunos.</p>
-                ) : (
-                    alunos.map(aluno => (
-                        <CardAlunoFrequencia
-                            key={aluno.id_aluno}
-                            id={aluno.id_aluno}
-                            nome_aluno={aluno.nome_aluno}
-                            presente={aluno.presente}
-                            justificativa={aluno.justificativa}
-                            onPresenteChange={handlePresenteChange}
-                            onJustificativaChange={handleJustificativaChange}
-                        />
-                    ))
-                )} */}
+                <label>Frequência:</label>
+
+                {console.log(presencaComAlunos)}
+
+              
+
+                
+                {/* {alunosPresenca.map(aluno => (
+                    <CardAlunoFrequencia
+                        key={aluno.id_aluno}
+                        id={aluno.id_aluno}
+                        nome_aluno={aluno.nome_aluno}
+                        presente={aluno.presente}
+                        justificativa={aluno.justificativa}
+                        onPresenteChange={handlePresenteChange}
+                        onJustificativaChange={handleJustificativaChange}
+                    />
+                ))} */}
             </div>
             <div className='divBotoesInputs'>
                 <button className='botaoInputs' onClick={() => navigate('/home-educador')}>Voltar</button>
