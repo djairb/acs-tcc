@@ -261,8 +261,8 @@
   border-radius: 5px;
   
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   padding: 10px 10px;
   flex-wrap: wrap;
   gap: 20px;
@@ -308,6 +308,13 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
+}
+
+.mainHome h2{
+
+  border-bottom: 2px solid #f1892a;
+  padding-bottom: 5px;
+  
 }
 
 .spinner {

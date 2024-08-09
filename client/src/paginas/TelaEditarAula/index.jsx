@@ -14,7 +14,7 @@ const TelaEditarAula = () => {
 
     const [alunosTurma, setAlunosTurma] = useState([]);
     const [alunosPresenca, setAlunosPresenca] = useState([]);
-    const { register, formState: { errors }, handleSubmit, watch } = useForm();
+    const { register, formState: { errors }, handleSubmit} = useForm();
 
     const location = useLocation();
 
@@ -55,7 +55,7 @@ const TelaEditarAula = () => {
         };
 
         carregarDados();
-    }, [user.id_educador]);
+    }, [user.id_educador, objetoAula.id_aula, objetoAula.id_turma]);
 
 
     const presencaComAlunos = alunosPresenca.map(presenca => ({
@@ -89,6 +89,7 @@ const TelaEditarAula = () => {
     const onSubmit = async (data) => {
 
         console.log(data)
+        {console.log(presencaComAlunos)}
 
         // const todasFaltasRegistradas = alunosPresenca.every(aluno => aluno.presente !== '');
 
@@ -154,10 +155,9 @@ const TelaEditarAula = () => {
 
                 <label>Frequência:</label>
 
-                {console.log(presencaComAlunos)}
+                
 
                 {loading ? <div className="spinner"></div> :
-
 
                     presencaComAlunos.map(presencaAluno => (
                         <CardAlunoFrequencia
@@ -172,15 +172,7 @@ const TelaEditarAula = () => {
                         />
                     ))
 
-
-
-
-
                 }
-
-
-
-
 
             </div>
             <div className='divBotoesInputs'>

@@ -97,11 +97,13 @@ const TelaHomeEducador = () => {
 
             </div>
 
+            <h2>Aulas registradas:</h2>
+
             <div className='aulasDiv'>
 
-                {loading && <div className="spinner"></div>}
+                {loading ? <div className="spinner"></div> :
 
-                {aulas.length === 0 ? <p>Ainda sem aulas</p> :
+                aulas.length === 0 ? <p>Sem aulas registradas</p> :
 
                     aulasComTurmas.map(aula => (
 
@@ -116,9 +118,7 @@ const TelaHomeEducador = () => {
                             turma_aula={aula.turma.nome_turma}
                             turno_aula={aula.turma.turno}
                             descricao={aula.descricao}
-
-
-
+                            
                         />
 
                     ))

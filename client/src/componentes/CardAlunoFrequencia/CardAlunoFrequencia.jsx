@@ -17,9 +17,11 @@ export default function CardAlunoFrequencia({ id, nome_aluno, presente, justific
     const handlePresenteChange = (e) => {
         const newPresente = e.target.value;
         setLocalPresente(newPresente);
+        
         if (onPresenteChange) {
             onPresenteChange(id, newPresente);
         }
+        
     };
 
     const handleJustificativaChange = (e) => {
@@ -72,7 +74,10 @@ export default function CardAlunoFrequencia({ id, nome_aluno, presente, justific
                 </div>
             </div>
 
+            
+
             {localPresente === 'justificada' && (
+                
                 <textarea
                     value={localJustificativa}
                     placeholder='Adicionar justificativa'
