@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form';
 import Axios from "axios";
 import { format } from 'date-fns';
 
+import CardAlunoFrequencia from '../../componentes/CardAlunoFrequencia/CardAlunoFrequencia'
+
 const TelaEditarAula = () => {
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
@@ -18,6 +20,8 @@ const TelaEditarAula = () => {
 
     const objetoAula = location.state;
 
+    const [loading, setLoading] = useState(false);
+
 
     useEffect(() => {
         if (user.id_educador === null) {
@@ -27,6 +31,8 @@ const TelaEditarAula = () => {
 
     useEffect(() => {
         const carregarDados = async () => {
+
+            setLoading(true);
             try {
                 // Carrega as presenças
                 const presencasResponse = await Axios.get('http://localhost:3001/getAllPresencasByIdAula', {
@@ -39,10 +45,12 @@ const TelaEditarAula = () => {
                     params: { id: objetoAula.id_turma }
                 });
                 setAlunosTurma(alunosResponse.data);
-                
+                setLoading(false);
+
             } catch (error) {
                 console.error('Erro ao carregar dados:', error);
                 alert("Ocorreu um erro ao tentar carregar os dados. Por favor, tente novamente mais tarde.");
+                setLoading(false);
             }
         };
 
@@ -148,20 +156,32 @@ const TelaEditarAula = () => {
 
                 {console.log(presencaComAlunos)}
 
-              
+                {loading ? <div className="spinner"></div> :
 
-                
-                {/* {alunosPresenca.map(aluno => (
-                    <CardAlunoFrequencia
-                        key={aluno.id_aluno}
-                        id={aluno.id_aluno}
-                        nome_aluno={aluno.nome_aluno}
-                        presente={aluno.presente}
-                        justificativa={aluno.justificativa}
-                        onPresenteChange={handlePresenteChange}
-                        onJustificativaChange={handleJustificativaChange}
-                    />
-                ))} */}
+
+                    presencaComAlunos.map(presencaAluno => (
+                        <CardAlunoFrequencia
+                            key={presencaAluno.id_aluno}
+                            id={presencaAluno.id_aluno}
+                            nome_aluno={presencaAluno.aluno.nome_aluno}
+
+                            presente={presencaAluno.presente}
+                            justificativa={presencaAluno.justificativa}
+                            onPresenteChange={handlePresenteChange}
+                            onJustificativaChange={handleJustificativaChange}
+                        />
+                    ))
+
+
+
+
+
+                }
+
+
+
+
+
             </div>
             <div className='divBotoesInputs'>
                 <button className='botaoInputs' onClick={() => navigate('/home-educador')}>Voltar</button>
